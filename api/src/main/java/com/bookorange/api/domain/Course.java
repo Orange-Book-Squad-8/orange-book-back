@@ -1,9 +1,7 @@
 package com.bookorange.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +11,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +26,7 @@ public class Course {
 
     @OneToMany
     @JsonIgnore
-    private ArrayList<Lesson> lessons;
+    private List<Lesson> lessons;
 
     public void addLesson(Lesson lesson) {
         getLessons().add(lesson);
@@ -42,16 +41,15 @@ public class Course {
     }
 
     public Double getProgress() {
-        return lessons.stream().mapToDouble(lesson -> lesson.getWatched().compareTo(true)).sum() / lessons.size();
+        return lessons.stream().mapToDouble(lesson -> Boolean.compare(lesson.getWatched(),false)).sum() / lessons.size();
     }
 
     public List<Lesson> getWatchedLessons() {
         return lessons.stream().filter(Lesson::getWatched).collect(Collectors.toList());
     }
 
-    public List<Lesson> getNotWatchedLessons() {
+    public List<Lesson> getUnwatchedLessons() {
         return lessons.stream().filter(lesson -> !lesson.getWatched()).collect(Collectors.toList());
     }
-
 
 }
