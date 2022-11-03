@@ -1,16 +1,20 @@
 package com.bookorange.api.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppUser {
 
     @Id
@@ -23,35 +27,36 @@ public class AppUser {
 
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Role role;
 
     @JsonIgnore
-    private ArrayList<Course> coursesSubscribed;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Course> subscribedCourses;
 
     @JsonIgnore
-    private ArrayList<Course> coursesArchived;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Course> archivedCourses;
 
-
-    public void addCourseSubscribed(Course course) {
-        getCoursesSubscribed().add(course);
+    public void addSubscribedCourse(Course course) {
+        getSubscribedCourses().add(course);
     }
 
-    public void removeCourseSubscribed(Course course) {
-        getCoursesSubscribed().remove(course);
+    public void removeSubscribedCourse(Course course) {
+        getSubscribedCourses().remove(course);
     }
 
-    public void addCourseArchived(Course course) {
-        getCoursesArchived().add(course);
+    public void addArchivedCourse(Course course) {
+        getArchivedCourses().add(course);
     }
 
-    public void removeCourseArchived(Course course) {
-        getCoursesArchived().remove(course);
+    public void removeArchivedCourse(Course course) {
+        getArchivedCourses().remove(course);
     }
 
     public void finishCourse(Course course){
-        removeCourseSubscribed(course);
-        addCourseArchived(course);
+        removeSubscribedCourse(course);
+        addArchivedCourse(course);
     }
 
 
