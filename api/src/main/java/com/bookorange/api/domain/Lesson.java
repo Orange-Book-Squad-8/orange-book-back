@@ -1,5 +1,6 @@
 package com.bookorange.api.domain;
 
+import com.bookorange.api.enumerator.ContentType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,7 @@ public class Lesson {
 
     private String topic;
 
-    private String contentType;
+    private ContentType contentType;
 
     private Integer durationInMinutes;
 }
