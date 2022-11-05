@@ -45,6 +45,9 @@ public class AppUser {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Course> archivedCourses;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Course> myCourses;
+
     public void addSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
         getSubscribedCourses().add(course);
@@ -63,6 +66,16 @@ public class AppUser {
     public void removeArchivedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
         getArchivedCourses().remove(course);
+    }
+
+    public void addMyCourse(Course course) {
+        if (course == null) throw new IllegalArgumentException("course cannot be null");
+        getMyCourses().add(course);
+    }
+
+    public void removeMyCourse(Course course) {
+        if (course == null) throw new IllegalArgumentException("course cannot be null");
+        getMyCourses().remove(course);
     }
 
     public void finishCourse(Course course) {
