@@ -1,5 +1,7 @@
 package com.bookorange.api.domain;
 
+import com.bookorange.api.enumerator.Difficulty;
+import com.bookorange.api.enumerator.StackCategories;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +27,10 @@ public class Course {
 
     private String creator;
 
-    private String category;
+    private StackCategories category;
 
+    private Difficulty difficulty;
+    
     @OneToMany
     @JsonIgnore
     private List<Lesson> lessons;
