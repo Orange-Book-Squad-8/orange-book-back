@@ -1,5 +1,7 @@
 package com.bookorange.api.service.implementation;
 
+import com.bookorange.api.domain.AppUser;
+import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
 import com.bookorange.api.repository.AppUserRepository;
@@ -20,27 +22,44 @@ public class AppUserServiceImp implements AppUserService {
     }
 
     @Override
-    public AppUserDTO create(UserCreateDTO userCreateDTO) {
-        return null;
+    public AppUser create(UserCreateDTO userCreateDTO, Role role) {
+        AppUser user = new AppUser();
+        user.setUsername(userCreateDTO.getUsername());
+        user.setEmail(userCreateDTO.getEmail());
+        user.setContentType(userCreateDTO.getContentType());
+        user.setRole(role);
+        return appUserRepository.save(user);
     }
 
     @Override
-    public AppUserDTO update(AppUserDTO appUserDTO) {
-        return null;
+    public AppUser update(AppUserDTO appUserDTO) {
+        AppUser user = appUserRepository.findByUsername(appUserDTO.getUsername());
+        user.setRole(appUserDTO.getRole());
+        user.setBadges(appUserDTO.getBadges());
+        user.setEmail(appUserDTO.getEmail());
+        user.setUsername(appUserDTO.getUsername());
+        user.setContentType(appUserDTO.getContentType());
+        return appUserRepository.save(user);
     }
 
     @Override
-    public AppUserDTO findByUsername(String username) {
-        return null;
+    public AppUser findById(Long userId) {
+        return appUserRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
-    public List<AppUserDTO> findAll() {
-        return null;
+    public AppUser findByUsername(String username) {
+        return appUserRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<AppUser> findAll() {
+        return appUserRepository.findAll();
     }
 
     @Override
     public void remove(Long userId) {
-
+        appUserRepository.deleteById(userId);
     }
+
 }
