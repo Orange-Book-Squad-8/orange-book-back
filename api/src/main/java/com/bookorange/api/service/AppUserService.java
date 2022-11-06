@@ -14,6 +14,8 @@ public interface AppUserService {
 
     AppUser findById(Long userId);
 
+    AppUser findByUsername(String username);
+
     List<AppUser> findAll();
 
     void remove(Long userId);

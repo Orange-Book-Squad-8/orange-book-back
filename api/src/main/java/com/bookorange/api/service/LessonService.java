@@ -7,7 +7,7 @@ import com.bookorange.api.dto.lessonDto.LessonDTO;
 import java.util.List;
 
 public interface LessonService {
-    void create(LessonCreateDTO lesson);
+    Lesson create(LessonCreateDTO lessonDTO);
 
     Lesson findById(Long lessonId);
 

@@ -28,4 +28,6 @@ public interface CourseService {
 
     void removeSection(CourseSectionEditDTO courseSectionEditDTO);
 
+    Integer getCourseDuration(Long courseId);
+
 }

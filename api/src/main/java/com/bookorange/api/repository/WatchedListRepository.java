@@ -8,6 +8,13 @@ import java.util.List;
 
 public interface WatchedListRepository extends JpaRepository<WatchedList, Long> {
 
-    @Query(value = "SELECT * FROM TB_WATCHED WHERE WATCHED = ?1", nativeQuery = true)
-    List<WatchedList> findWatchedListByUser(Boolean watched);
+    @Query("select u from WatchedList u where u.appUser = ?1 and u.lesson = ?2")
+    WatchedList findByAppUserAAndLesson(Long appUser, Long lesson);
+
+    @Query("select u from WatchedList u where u.appUser = ?1 and u.watched = true")
+    List<WatchedList> findWatchedListByUser(Long appUser);
+
+    @Query("select WatchedList from WatchedList u where u.appUser = ?1 and u.lastWatched = true")
+    WatchedList findLastWatchedUser(Long appUser);
+    
 }

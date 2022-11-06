@@ -1,12 +1,16 @@
 package com.bookorange.api.service;
 
+import com.bookorange.api.domain.WatchedList;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
-import com.bookorange.api.dto.watchedDto.WatchedLessonListDTO;
+
+import java.util.List;
 
 public interface WatchedListService {
     void setWatched(WatchedLessonDTO watchedLesson);
 
-    WatchedLessonListDTO getWatchedLesson(Long userId);
+    List<WatchedList> getWatchedLesson(Long userId);
+
+    WatchedList getLastWatchedLesson(Long userId);
 
     void setUnwatched(WatchedLessonDTO watchedLesson);
 }
