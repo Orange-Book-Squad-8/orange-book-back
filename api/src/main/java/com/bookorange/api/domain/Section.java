@@ -1,6 +1,5 @@
 package com.bookorange.api.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,6 @@ public class Section {
     private Long id;
 
     @OneToMany
-    @JsonIgnore
     private LinkedList<Lesson> lessons;
 
     public void addLesson(Lesson lesson) {

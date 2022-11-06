@@ -17,13 +17,15 @@ public class WatchedList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private AppUser appUser;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Lesson lesson;
 
     private Boolean watched = false;
+
+    private Boolean lastWatched = false;
 
     private Date removedAt;
 }

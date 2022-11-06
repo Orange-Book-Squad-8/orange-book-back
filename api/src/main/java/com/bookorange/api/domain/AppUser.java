@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-
 @Entity
 @Getter
 @Setter
@@ -45,6 +44,7 @@ public class AppUser {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Course> archivedCourses;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<Course> myCourses;
 
