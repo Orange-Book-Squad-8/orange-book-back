@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,7 +33,7 @@ public class Course {
     private Boolean visible = true;
 
     @OneToMany
-    private LinkedHashSet<Section> sections;
+    private List<Section> sections;
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();

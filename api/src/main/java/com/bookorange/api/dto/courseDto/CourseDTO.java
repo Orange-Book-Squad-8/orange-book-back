@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.LinkedHashSet;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +28,7 @@ public class CourseDTO {
 
     private Boolean visible;
 
-    private LinkedHashSet<Section> sections;
+    private List<Section> sections;
 
     public CourseDTO(Course course) {
         id = course.getId();

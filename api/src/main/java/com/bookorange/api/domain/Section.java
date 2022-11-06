@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.LinkedList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class Section {
     private String name;
 
     @OneToMany
-    private LinkedList<Lesson> lessons;
+    private List<Lesson> lessons;
 
     public void addLesson(Lesson lesson) {
         if (lessons == null) throw new IllegalArgumentException("lesson cannot be null");

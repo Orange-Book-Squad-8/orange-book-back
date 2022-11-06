@@ -45,17 +45,17 @@ public class CourseServiceImp implements CourseService {
 
     @Override
     public List<Course> findByContentType(String contentType) {
-        return courseRepository.listByContentType(contentType);
+        return null; //courseRepository.listByContentType(contentType);
     }
 
     @Override
     public List<Course> findByCategory(String category) {
-        return courseRepository.listByCategory(category);
+        return null; //courseRepository.listByCategory(category);
     }
 
     @Override
     public List<Course> findByDifficulty(String difficulty) {
-        return courseRepository.listByDifficulty(difficulty);
+        return null; //courseRepository.listByDifficulty(difficulty);
     }
 
     @Override

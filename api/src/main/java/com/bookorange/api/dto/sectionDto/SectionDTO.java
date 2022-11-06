@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.LinkedList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class SectionDTO {
     private Long id;
     private String name;
-    private LinkedList<Lesson> lessons;
+    private List<Lesson> lessons;
 
     public SectionDTO(Section section) {
         id = section.getId();

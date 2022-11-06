@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class AppUserDTO {
 
     private ContentType contentType;
 
-    private Set<String> badges;
+    private List<String> badges;
 
     private Role role;
 

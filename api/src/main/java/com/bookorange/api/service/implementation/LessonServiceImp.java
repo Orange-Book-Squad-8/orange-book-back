@@ -46,12 +46,12 @@ public class LessonServiceImp implements LessonService {
 
     @Override
     public List<Lesson> findByTopic(String topic) {
-        return lessonRepository.listByTopic(topic);
+        return null; //lessonRepository.listByTopic(topic);
     }
 
     @Override
     public List<Lesson> findByContentType(String contentType) {
-        return lessonRepository.listByContentType(contentType);
+        return null; //lessonRepository.listByContentType(contentType);
     }
 
     @Override
