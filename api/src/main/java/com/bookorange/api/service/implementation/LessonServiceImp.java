@@ -1,10 +1,9 @@
 package com.bookorange.api.service.implementation;
 
 
-import com.bookorange.api.dto.lessonDto.LessonContentDTO;
+import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.dto.lessonDto.LessonCreateDTO;
 import com.bookorange.api.dto.lessonDto.LessonDTO;
-import com.bookorange.api.dto.lessonDto.LessonTopicDTO;
 import com.bookorange.api.repository.LessonRepository;
 import com.bookorange.api.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +21,34 @@ public class LessonServiceImp implements LessonService {
         this.lessonRepository = lessonRepository;
     }
 
-    @Override
-    public void create(LessonCreateDTO lesson) {
-
-    }
 
     @Override
-    public LessonDTO findById(Long lessonIn) {
+    public Lesson create(LessonCreateDTO lesson) {
         return null;
     }
 
     @Override
-    public List<LessonDTO> findAll() {
+    public Lesson findById(Long lessonId) {
         return null;
     }
 
     @Override
-    public List<LessonDTO> findByTopic(LessonTopicDTO lessonTopicDTO) {
+    public List<Lesson> findAll() {
         return null;
     }
 
     @Override
-    public List<LessonDTO> findByContentType(LessonContentDTO lessonContentDTO) {
+    public List<Lesson> findByTopic(String topic) {
         return null;
     }
 
     @Override
-    public LessonDTO update(LessonDTO lessonDTO) {
+    public List<Lesson> findByContentType(String contentType) {
+        return null;
+    }
+
+    @Override
+    public Lesson update(LessonDTO lessonDTO) {
         return null;
     }
 

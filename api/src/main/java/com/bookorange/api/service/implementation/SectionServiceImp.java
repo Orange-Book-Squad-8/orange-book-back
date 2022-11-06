@@ -1,9 +1,9 @@
 package com.bookorange.api.service.implementation;
 
-import com.bookorange.api.dto.sectionDto.CreateSectionDTO;
-import com.bookorange.api.dto.sectionDto.SectionAddLessonDTO;
+import com.bookorange.api.domain.Section;
+import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.dto.sectionDto.SectionDTO;
-import com.bookorange.api.dto.sectionDto.SectionRemoveLessonDTO;
+import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 import com.bookorange.api.repository.SectionRepository;
 import com.bookorange.api.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +19,14 @@ public class SectionServiceImp implements SectionService {
         this.sectionRepository = sectionRepository;
     }
 
+
     @Override
-    public SectionDTO create(CreateSectionDTO createSectionDTO) {
+    public Section create(SectionCreateDTO createSection) {
         return null;
     }
 
     @Override
-    public SectionDTO update(SectionDTO sectionDTO) {
+    public Section update(SectionDTO sectionDTO) {
         return null;
     }
 
@@ -35,17 +36,17 @@ public class SectionServiceImp implements SectionService {
     }
 
     @Override
-    public void addLesson(SectionAddLessonDTO sectionAddLessonDTO) {
+    public void addLesson(SectionEditLessonDTO sectionEditLessonDTO) {
 
     }
 
     @Override
-    public void removeLesson(SectionRemoveLessonDTO sectionRemoveLessonDTO) {
+    public void removeLesson(SectionEditLessonDTO sectionEditLessonDTO) {
 
     }
 
     @Override
-    public SectionDTO findById(Long sectionId) {
+    public Section findById(Long sectionId) {
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.bookorange.api.service.implementation;
 
+import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.roleDto.RoleCreateDTO;
 import com.bookorange.api.dto.roleDto.RoleDTO;
 import com.bookorange.api.repository.RoleRepository;
@@ -19,23 +20,24 @@ public class RoleServiceImp implements RoleService {
         this.roleRepository = roleRepository;
     }
 
+
     @Override
-    public RoleDTO create(RoleCreateDTO roleCreateDTO) {
+    public Role create(RoleCreateDTO roleCreateDTO) {
         return null;
     }
 
     @Override
-    public RoleDTO findByName(String roleName) {
+    public Role findByName(String roleName) {
         return null;
     }
 
     @Override
-    public List<RoleDTO> findAll() {
+    public List<Role> findAll() {
         return null;
     }
 
     @Override
-    public RoleDTO update(RoleDTO roleDTO) {
+    public Role update(RoleDTO roleDTO) {
         return null;
     }
 

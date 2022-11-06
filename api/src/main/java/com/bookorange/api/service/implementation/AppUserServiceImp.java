@@ -1,5 +1,7 @@
 package com.bookorange.api.service.implementation;
 
+import com.bookorange.api.domain.AppUser;
+import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
 import com.bookorange.api.repository.AppUserRepository;
@@ -20,22 +22,28 @@ public class AppUserServiceImp implements AppUserService {
     }
 
     @Override
-    public AppUserDTO create(UserCreateDTO userCreateDTO) {
+    public AppUser create(UserCreateDTO userCreateDTO, Role role) {
         return null;
     }
 
     @Override
-    public AppUserDTO update(AppUserDTO appUserDTO) {
+    public AppUser update(AppUserDTO appUserDTO) {
         return null;
     }
 
     @Override
-    public AppUserDTO findByUsername(String username) {
+    public AppUser findByUsername(String username) {
+        return null;
+    }
+
+
+    @Override
+    public AppUser findById(Long userId) {
         return null;
     }
 
     @Override
-    public List<AppUserDTO> findAll() {
+    public List<AppUser> findAll() {
         return null;
     }
 

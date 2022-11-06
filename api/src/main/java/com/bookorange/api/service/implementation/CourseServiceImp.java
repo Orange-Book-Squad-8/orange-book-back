@@ -1,5 +1,6 @@
 package com.bookorange.api.service.implementation;
 
+import com.bookorange.api.domain.Course;
 import com.bookorange.api.dto.courseDto.*;
 import com.bookorange.api.repository.CourseRepository;
 import com.bookorange.api.service.CourseService;
@@ -19,37 +20,37 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public CourseDTO create(CourseCreateDTO courseCreateDTO) {
+    public Course create(CourseCreateDTO courseCreateDTO) {
         return null;
     }
 
     @Override
-    public CourseDTO findById(Long courseId) {
+    public Course findById(Long courseId) {
         return null;
     }
 
     @Override
-    public List<CourseDTO> findAll() {
+    public List<Course> findAll() {
         return null;
     }
 
     @Override
-    public List<CourseDTO> findByContentType(CourseContentDTO courseContentDTO) {
+    public List<Course> findByContentType(String contentType) {
         return null;
     }
 
     @Override
-    public List<CourseDTO> findByCategory(CourseCategoryDTO courseCategoryDTO) {
+    public List<Course> findByCategory(String category) {
         return null;
     }
 
     @Override
-    public List<CourseDTO> findByDifficulty(CourseDifficultyDTO courseDifficultyDTO) {
+    public List<Course> findByDifficulty(String difficulty) {
         return null;
     }
 
     @Override
-    public CourseDTO update(CourseDTO courseDTO) {
+    public Course update(CourseDTO courseDTO) {
         return null;
     }
 
@@ -59,12 +60,12 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public void addSection(CourseSectionDTO courseSectionDTO) {
+    public void addSection(CourseSectionEditDTO courseSectionEditDTO) {
 
     }
 
     @Override
-    public void removeSection(CourseSectionDTO courseSectionDTO) {
+    public void removeSection(CourseSectionEditDTO courseSectionEditDTO) {
 
     }
 }

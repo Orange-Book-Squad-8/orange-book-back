@@ -12,6 +12,8 @@ public interface AppUserService {
 
     AppUser update(AppUserDTO appUserDTO);
 
+    AppUser findByUsername(String username);
+
     AppUser findById(Long userId);
 
     List<AppUser> findAll();
