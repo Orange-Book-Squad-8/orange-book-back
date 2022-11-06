@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WatchedCourseDTO {
+public class WatchedLessonDTO {
     private Long userId;
-    private Long courseId;
+    private Long lessonId;
 }
