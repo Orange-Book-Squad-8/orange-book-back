@@ -3,9 +3,7 @@ package com.bookorange.api.service.implementation;
 import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.domain.WatchedList;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
-import com.bookorange.api.repository.WatchedListRepository;
 import com.bookorange.api.service.WatchedListService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,18 +11,19 @@ import java.util.List;
 @Service
 public class WatchedListServiceImp implements WatchedListService {
 
-    private final WatchedListRepository watchedListRepository;
+    //private final WatchedListRepository watchedListRepository;
 
     /*
     @Autowired
     private AppUserRepository appUserRepository;
     @Autowired
     private LessonRepository lessonRepository;
-*/
+
     @Autowired
     public WatchedListServiceImp(WatchedListRepository watchedListRepository) {
         this.watchedListRepository = watchedListRepository;
     }
+     */
 
     @Override
     public void setWatched(WatchedLessonDTO watchedLesson) {

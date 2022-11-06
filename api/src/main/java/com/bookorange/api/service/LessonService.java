@@ -3,6 +3,7 @@ package com.bookorange.api.service;
 import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.dto.lessonDto.LessonCreateDTO;
 import com.bookorange.api.dto.lessonDto.LessonDTO;
+import com.bookorange.api.enumerator.ContentType;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface LessonService {
 
     List<Lesson> findByTopic(String topic);
 
-    List<Lesson> findByContentType(String contentType);
+    List<Lesson> findByContentType(ContentType contentType);
 
     Lesson update(LessonDTO lessonDTO);
 

@@ -4,6 +4,7 @@ package com.bookorange.api.service.implementation;
 import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.dto.lessonDto.LessonCreateDTO;
 import com.bookorange.api.dto.lessonDto.LessonDTO;
+import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.repository.LessonRepository;
 import com.bookorange.api.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +47,12 @@ public class LessonServiceImp implements LessonService {
 
     @Override
     public List<Lesson> findByTopic(String topic) {
-        return null; //lessonRepository.listByTopic(topic);
+        return lessonRepository.findByTopic(topic);
     }
 
     @Override
-    public List<Lesson> findByContentType(String contentType) {
-        return null; //lessonRepository.listByContentType(contentType);
+    public List<Lesson> findByContentType(ContentType contentType) {
+        return lessonRepository.findByContentType(contentType);
     }
 
     @Override

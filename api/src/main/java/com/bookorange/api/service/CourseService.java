@@ -4,6 +4,8 @@ import com.bookorange.api.domain.Course;
 import com.bookorange.api.dto.courseDto.CourseCreateDTO;
 import com.bookorange.api.dto.courseDto.CourseDTO;
 import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
+import com.bookorange.api.enumerator.Difficulty;
+import com.bookorange.api.enumerator.StackCategories;
 
 import java.util.List;
 
@@ -14,11 +16,9 @@ public interface CourseService {
 
     List<Course> findAll();
 
-    List<Course> findByContentType(String contentType);
+    List<Course> findByCategory(StackCategories category);
 
-    List<Course> findByCategory(String category);
-
-    List<Course> findByDifficulty(String difficulty);
+    List<Course> findByDifficulty(Difficulty difficulty);
 
     Course update(CourseDTO courseDTO);
 

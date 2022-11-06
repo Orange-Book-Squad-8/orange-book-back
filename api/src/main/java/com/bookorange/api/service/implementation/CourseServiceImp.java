@@ -4,6 +4,8 @@ import com.bookorange.api.domain.Course;
 import com.bookorange.api.dto.courseDto.CourseCreateDTO;
 import com.bookorange.api.dto.courseDto.CourseDTO;
 import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
+import com.bookorange.api.enumerator.Difficulty;
+import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.repository.CourseRepository;
 import com.bookorange.api.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,18 +46,13 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public List<Course> findByContentType(String contentType) {
-        return null; //courseRepository.listByContentType(contentType);
+    public List<Course> findByCategory(StackCategories category) {
+        return courseRepository.findByCategory(category);
     }
 
     @Override
-    public List<Course> findByCategory(String category) {
-        return null; //courseRepository.listByCategory(category);
-    }
-
-    @Override
-    public List<Course> findByDifficulty(String difficulty) {
-        return null; //courseRepository.listByDifficulty(difficulty);
+    public List<Course> findByDifficulty(Difficulty difficulty) {
+        return courseRepository.findByDifficulty(difficulty);
     }
 
     @Override
