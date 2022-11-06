@@ -1,16 +1,28 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.repository.CourseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.bookorange.api.dto.courseDto.*;
 
-@Service
-public class CourseService {
+import java.util.List;
 
-    private final CourseRepository courseRepository;
+public interface CourseService {
+    CourseDTO create(CourseCreateDTO courseCreateDTO);
 
-    @Autowired
-    public CourseService(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
+    CourseDTO findById(Long courseId);
+
+    List<CourseDTO> findAll();
+
+    List<CourseDTO> findByContentType(CourseContentDTO courseContentDTO);
+
+    List<CourseDTO> findByCategory(CourseCategoryDTO courseCategoryDTO);
+
+    List<CourseDTO> findByDifficulty(CourseDifficultyDTO courseDifficultyDTO);
+
+    CourseDTO update(CourseDTO courseDTO);
+
+    void delete(Long courseId);
+
+    void addSection(CourseSectionDTO courseSectionDTO);
+
+    void removeSection(CourseSectionDTO courseSectionDTO);
+
 }

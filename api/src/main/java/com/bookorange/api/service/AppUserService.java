@@ -1,16 +1,18 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.repository.AppUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.bookorange.api.dto.appuserDto.AppUserDTO;
+import com.bookorange.api.dto.appuserDto.UserCreateDTO;
 
-@Service
-public class AppUserService {
+import java.util.List;
 
-    private final AppUserRepository appUserRepository;
+public interface AppUserService {
+    AppUserDTO create(UserCreateDTO userCreateDTO);
 
-    @Autowired
-    public AppUserService(AppUserRepository appUserRepository) {
-        this.appUserRepository = appUserRepository;
-    }
+    AppUserDTO update(AppUserDTO appUserDTO);
+
+    AppUserDTO findByUsername(String username);
+
+    List<AppUserDTO> findAll();
+
+    void remove(Long userId);
 }

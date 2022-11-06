@@ -1,16 +1,18 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.bookorange.api.dto.roleDto.RoleCreateDTO;
+import com.bookorange.api.dto.roleDto.RoleDTO;
 
-@Service
-public class RoleService {
+import java.util.List;
 
-    private final RoleRepository roleRepository;
+public interface RoleService {
+    RoleDTO create(RoleCreateDTO roleCreateDTO);
 
-    @Autowired
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    RoleDTO findByName(String roleName);
+
+    List<RoleDTO> findAll();
+
+    RoleDTO update(RoleDTO roleDTO);
+
+    void delete(Long roleId);
 }
