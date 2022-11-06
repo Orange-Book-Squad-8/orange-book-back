@@ -1,13 +1,14 @@
 package com.bookorange.api.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.bookorange.api.enumerator.Difficulty;
+import com.bookorange.api.enumerator.StackCategories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,22 +26,27 @@ public class Course {
 
     private String creator;
 
-    private String category;
+    private StackCategories category;
+
+    private Difficulty difficulty;
+
+    private Boolean visible = true;
 
     @OneToMany
-    @JsonIgnore
-    private List<Lesson> lessons;
-
-    public void addLesson(Lesson lesson) {
-        getLessons().add(lesson);
-    }
-
-    public void removeLesson(Lesson lesson) {
-        getLessons().remove(lesson);
-    }
+    private LinkedHashSet<Section> sections;
 
     public Integer getDuration() {
-        return lessons.stream().mapToInt(Lesson::getDurationInMinutes).sum();
+        return sections.stream().mapToInt(Section::getDuration).sum();
+    }
+
+    public void addSection(Section section) {
+        if (sections.contains(section)) throw new IllegalArgumentException("Section already exists");
+        sections.add(section);
+    }
+
+    public void removeSection(Section section) {
+        if (sections.contains(section)) throw new IllegalArgumentException("Section does not exist");
+        sections.remove(section);
     }
 
 }

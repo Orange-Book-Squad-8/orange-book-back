@@ -1,26 +1,14 @@
-package com.bookorange.api.domain;
+package com.bookorange.api.dto.lessonDto;
 
 import com.bookorange.api.enumerator.ContentType;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Getter
-@Setter
-public class Lesson {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+@Data
+public class LessonCreateDTO {
     private String title;
 
     private String description;
