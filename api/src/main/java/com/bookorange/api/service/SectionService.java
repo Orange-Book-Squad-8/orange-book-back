@@ -1,20 +1,20 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.dto.sectionDto.CreateSectionDTO;
-import com.bookorange.api.dto.sectionDto.SectionAddLessonDTO;
+import com.bookorange.api.domain.Section;
+import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.dto.sectionDto.SectionDTO;
-import com.bookorange.api.dto.sectionDto.SectionRemoveLessonDTO;
+import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 
 public interface SectionService {
-    SectionDTO create(CreateSectionDTO createSectionDTO);
+    Section create(SectionCreateDTO createSection);
 
-    SectionDTO update(SectionDTO sectionDTO);
+    Section update(SectionDTO sectionDTO);
 
     void delete(Long sectionId);
 
-    void addLesson(SectionAddLessonDTO sectionAddLessonDTO);
+    void addLesson(SectionEditLessonDTO sectionEditLessonDTO);
 
-    void removeLesson(SectionRemoveLessonDTO sectionRemoveLessonDTO);
+    void removeLesson(SectionEditLessonDTO sectionEditLessonDTO);
 
-    SectionDTO findById(Long sectionId);
+    Section findById(Long sectionId);
 }

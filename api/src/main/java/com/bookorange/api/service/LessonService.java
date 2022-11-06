@@ -1,24 +1,23 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.dto.lessonDto.LessonContentDTO;
+import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.dto.lessonDto.LessonCreateDTO;
 import com.bookorange.api.dto.lessonDto.LessonDTO;
-import com.bookorange.api.dto.lessonDto.LessonTopicDTO;
 
 import java.util.List;
 
 public interface LessonService {
     void create(LessonCreateDTO lesson);
 
-    LessonDTO findById(Long lessonIn);
+    Lesson findById(Long lessonId);
 
-    List<LessonDTO> findAll();
+    List<Lesson> findAll();
 
-    List<LessonDTO> findByTopic(LessonTopicDTO lessonTopicDTO);
+    List<Lesson> findByTopic(String topic);
 
-    List<LessonDTO> findByContentType(LessonContentDTO lessonContentDTO);
+    List<Lesson> findByContentType(String contentType);
 
-    LessonDTO update(LessonDTO lessonDTO);
+    Lesson update(LessonDTO lessonDTO);
 
     void delete(Long lessonId);
 }

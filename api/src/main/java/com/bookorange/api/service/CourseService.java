@@ -1,28 +1,31 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.dto.courseDto.*;
+import com.bookorange.api.domain.Course;
+import com.bookorange.api.dto.courseDto.CourseCreateDTO;
+import com.bookorange.api.dto.courseDto.CourseDTO;
+import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
 
 import java.util.List;
 
 public interface CourseService {
-    CourseDTO create(CourseCreateDTO courseCreateDTO);
+    Course create(CourseCreateDTO courseCreateDTO);
 
-    CourseDTO findById(Long courseId);
+    Course findById(Long courseId);
 
-    List<CourseDTO> findAll();
+    List<Course> findAll();
 
-    List<CourseDTO> findByContentType(CourseContentDTO courseContentDTO);
+    List<Course> findByContentType(String contentType);
 
-    List<CourseDTO> findByCategory(CourseCategoryDTO courseCategoryDTO);
+    List<Course> findByCategory(String category);
 
-    List<CourseDTO> findByDifficulty(CourseDifficultyDTO courseDifficultyDTO);
+    List<Course> findByDifficulty(String difficulty);
 
-    CourseDTO update(CourseDTO courseDTO);
+    Course update(CourseDTO courseDTO);
 
     void delete(Long courseId);
 
-    void addSection(CourseSectionDTO courseSectionDTO);
+    void addSection(CourseSectionEditDTO courseSectionEditDTO);
 
-    void removeSection(CourseSectionDTO courseSectionDTO);
+    void removeSection(CourseSectionEditDTO courseSectionEditDTO);
 
 }

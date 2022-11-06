@@ -1,18 +1,20 @@
 package com.bookorange.api.service;
 
+import com.bookorange.api.domain.AppUser;
+import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
 
 import java.util.List;
 
 public interface AppUserService {
-    AppUserDTO create(UserCreateDTO userCreateDTO);
+    AppUser create(UserCreateDTO userCreateDTO, Role role);
 
-    AppUserDTO update(AppUserDTO appUserDTO);
+    AppUser update(AppUserDTO appUserDTO);
 
-    AppUserDTO findByUsername(String username);
+    AppUser findById(Long userId);
 
-    List<AppUserDTO> findAll();
+    List<AppUser> findAll();
 
     void remove(Long userId);
 }
