@@ -1,6 +1,9 @@
 package com.bookorange.api.service.implementation;
 
-import com.bookorange.api.dto.courseDto.*;
+import com.bookorange.api.domain.Course;
+import com.bookorange.api.dto.courseDto.CourseCreateDTO;
+import com.bookorange.api.dto.courseDto.CourseDTO;
+import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
 import com.bookorange.api.repository.CourseRepository;
 import com.bookorange.api.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,52 +22,75 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public CourseDTO create(CourseCreateDTO courseCreateDTO) {
-        return null;
+    public Course create(CourseCreateDTO courseCreateDTO) {
+        Course course = new Course();
+        course.setTitle(courseCreateDTO.getTitle());
+        course.setDescription(courseCreateDTO.getDescription());
+        course.setCreator(courseCreateDTO.getCreator());
+        course.setCategory(courseCreateDTO.getCategory());
+        course.setDifficulty(courseCreateDTO.getDifficulty());
+        course.setVisible(courseCreateDTO.getVisible());
+        return courseRepository.save(course);
     }
 
     @Override
-    public CourseDTO findById(Long courseId) {
-        return null;
+    public Course findById(Long courseId) {
+        return courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
     @Override
-    public List<CourseDTO> findAll() {
-        return null;
+    public List<Course> findAll() {
+        return courseRepository.findAll();
     }
 
     @Override
-    public List<CourseDTO> findByContentType(CourseContentDTO courseContentDTO) {
-        return null;
+    public List<Course> findByContentType(String contentType) {
+        return courseRepository.listByContentType(contentType);
     }
 
     @Override
-    public List<CourseDTO> findByCategory(CourseCategoryDTO courseCategoryDTO) {
-        return null;
+    public List<Course> findByCategory(String category) {
+        return courseRepository.listByCategory(category);
     }
 
     @Override
-    public List<CourseDTO> findByDifficulty(CourseDifficultyDTO courseDifficultyDTO) {
-        return null;
+    public List<Course> findByDifficulty(String difficulty) {
+        return courseRepository.listByDifficulty(difficulty);
     }
 
     @Override
-    public CourseDTO update(CourseDTO courseDTO) {
-        return null;
+    public Course update(CourseDTO courseDTO) {
+        Course course = findById(courseDTO.getId());
+        course.setTitle(courseDTO.getTitle());
+        course.setDescription(courseDTO.getDescription());
+        course.setCreator(courseDTO.getCreator());
+        course.setCategory(courseDTO.getCategory());
+        course.setDifficulty(courseDTO.getDifficulty());
+        course.setVisible(courseDTO.getVisible());
+        course.setSections(courseDTO.getSections());
+        return courseRepository.save(course);
     }
 
     @Override
     public void delete(Long courseId) {
-
+        courseRepository.deleteById(courseId);
     }
 
     @Override
-    public void addSection(CourseSectionDTO courseSectionDTO) {
-
+    public void addSection(CourseSectionEditDTO courseSectionEditDTO) {
+        Course course = findById(courseSectionEditDTO.getId());
+        course.addSection(courseSectionEditDTO.getSection());
+        courseRepository.save(course);
     }
 
     @Override
-    public void removeSection(CourseSectionDTO courseSectionDTO) {
+    public void removeSection(CourseSectionEditDTO courseSectionEditDTO) {
+        Course course = findById(courseSectionEditDTO.getId());
+        course.removeSection(courseSectionEditDTO.getSection());
+    }
 
+    @Override
+    public Integer getCourseDuration(Long courseId) {
+        return findById(courseId).getDuration();
     }
 }
