@@ -1,18 +1,11 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.domain.AppUser;
-import com.bookorange.api.repository.AppUserRepository;
-import com.bookorange.api.repository.WatchedListRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
 
-@Service
-public class WatchedListService {
+public interface WatchedListService {
+    void setWatched(WatchedLessonDTO watchedLesson);
 
-    private final WatchedListRepository watchedListRepository;
+    WatchedLessonDTO getWatchedLesson(Long userId);
 
-    @Autowired
-    public WatchedListService(WatchedListRepository watchedListRepository){
-        this.watchedListRepository = watchedListRepository;
-    }
+    void setUnwatched(WatchedLessonDTO watchedLesson);
 }

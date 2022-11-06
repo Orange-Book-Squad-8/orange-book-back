@@ -1,4 +1,4 @@
-package com.bookorange.api.dto.watchedDto;
+package com.bookorange.api.dto.sectionDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WatchedCourseDTO {
-    private Long userId;
-    private Long courseId;
+public class SectionRemoveLessonDTO {
+    private Long sessionId;
+    private Long lessonId;
 }
