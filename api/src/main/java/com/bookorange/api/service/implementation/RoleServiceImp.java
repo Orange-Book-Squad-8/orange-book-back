@@ -1,5 +1,6 @@
 package com.bookorange.api.service.implementation;
 
+import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.roleDto.RoleCreateDTO;
 import com.bookorange.api.dto.roleDto.RoleDTO;
 import com.bookorange.api.repository.RoleRepository;
@@ -19,28 +20,33 @@ public class RoleServiceImp implements RoleService {
         this.roleRepository = roleRepository;
     }
 
+
     @Override
-    public RoleDTO create(RoleCreateDTO roleCreateDTO) {
-        return null;
+    public Role create(RoleCreateDTO roleCreateDTO) {
+        Role role = new Role();
+        role.setName(roleCreateDTO.getRoleName());
+        return roleRepository.save(role);
     }
 
     @Override
-    public RoleDTO findByName(String roleName) {
-        return null;
+    public Role findByName(String roleName) {
+        return roleRepository.findByName(roleName);
     }
 
     @Override
-    public List<RoleDTO> findAll() {
-        return null;
+    public List<Role> findAll() {
+        return roleRepository.findAll();
     }
 
     @Override
-    public RoleDTO update(RoleDTO roleDTO) {
-        return null;
+    public Role update(RoleDTO roleDTO) {
+        Role role = roleRepository.findById(roleDTO.getId()).orElseThrow(() -> new RuntimeException("Role not found"));
+        role.setName(roleDTO.getRoleName());
+        return roleRepository.save(role);
     }
 
     @Override
     public void delete(Long roleId) {
-
+        roleRepository.deleteById(roleId);
     }
 }

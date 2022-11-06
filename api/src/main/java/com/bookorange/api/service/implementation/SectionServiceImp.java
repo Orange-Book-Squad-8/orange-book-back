@@ -1,9 +1,9 @@
 package com.bookorange.api.service.implementation;
 
-import com.bookorange.api.dto.sectionDto.CreateSectionDTO;
-import com.bookorange.api.dto.sectionDto.SectionAddLessonDTO;
+import com.bookorange.api.domain.Section;
+import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.dto.sectionDto.SectionDTO;
-import com.bookorange.api.dto.sectionDto.SectionRemoveLessonDTO;
+import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 import com.bookorange.api.repository.SectionRepository;
 import com.bookorange.api.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,33 +19,45 @@ public class SectionServiceImp implements SectionService {
         this.sectionRepository = sectionRepository;
     }
 
+
     @Override
-    public SectionDTO create(CreateSectionDTO createSectionDTO) {
-        return null;
+    public Section create(SectionCreateDTO createSection) {
+        Section section = new Section();
+        section.setName(createSection.getName());
+        return sectionRepository.save(section);
     }
 
     @Override
-    public SectionDTO update(SectionDTO sectionDTO) {
-        return null;
+    public Section update(SectionDTO sectionDTO) {
+        Section section = findById(sectionDTO.getId());
+        section.setName(sectionDTO.getName());
+        section.setLessons(sectionDTO.getLessons());
+        return sectionRepository.save(section);
     }
 
     @Override
     public void delete(Long sectionId) {
+        sectionRepository.deleteById(sectionId);
+    }
 
+
+    @Override
+    public void addLesson(SectionEditLessonDTO sectionEditLessonDTO) {
+        Section section = findById(sectionEditLessonDTO.getSectionId());
+        section.addLesson(sectionEditLessonDTO.getLesson());
+        sectionRepository.save(section);
     }
 
     @Override
-    public void addLesson(SectionAddLessonDTO sectionAddLessonDTO) {
-
+    public void removeLesson(SectionEditLessonDTO sectionEditLessonDTO) {
+        Section section = findById(sectionEditLessonDTO.getSectionId());
+        section.removeLesson(sectionEditLessonDTO.getLesson());
+        sectionRepository.save(section);
     }
 
     @Override
-    public void removeLesson(SectionRemoveLessonDTO sectionRemoveLessonDTO) {
-
+    public Section findById(Long sectionId) {
+        return sectionRepository.findById(sectionId).orElseThrow(() -> new RuntimeException("Could not find section"));
     }
 
-    @Override
-    public SectionDTO findById(Long sectionId) {
-        return null;
-    }
 }
