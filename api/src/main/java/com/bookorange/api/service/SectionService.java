@@ -1,16 +1,20 @@
 package com.bookorange.api.service;
 
-import com.bookorange.api.repository.SectionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.bookorange.api.dto.sectionDto.CreateSectionDTO;
+import com.bookorange.api.dto.sectionDto.SectionAddLessonDTO;
+import com.bookorange.api.dto.sectionDto.SectionDTO;
+import com.bookorange.api.dto.sectionDto.SectionRemoveLessonDTO;
 
-@Service
-public class SectionService {
+public interface SectionService {
+    SectionDTO create(CreateSectionDTO createSectionDTO);
 
-    private final SectionRepository sectionRepository;
+    SectionDTO update(SectionDTO sectionDTO);
 
-    @Autowired
-    public SectionService(SectionRepository sectionRepository) {
-        this.sectionRepository = sectionRepository;
-    }
+    void delete(Long sectionId);
+
+    void addLesson(SectionAddLessonDTO sectionAddLessonDTO);
+
+    void removeLesson(SectionRemoveLessonDTO sectionRemoveLessonDTO);
+
+    SectionDTO findById(Long sectionId);
 }

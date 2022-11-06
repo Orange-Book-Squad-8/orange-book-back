@@ -1,17 +1,24 @@
 package com.bookorange.api.service;
 
+import com.bookorange.api.dto.lessonDto.LessonContentDTO;
+import com.bookorange.api.dto.lessonDto.LessonCreateDTO;
+import com.bookorange.api.dto.lessonDto.LessonDTO;
+import com.bookorange.api.dto.lessonDto.LessonTopicDTO;
 
-import com.bookorange.api.repository.LessonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
-public class LessonService {
+public interface LessonService {
+    void create(LessonCreateDTO lesson);
 
-    private final LessonRepository lessonRepository;
+    LessonDTO findById(Long lessonIn);
 
-    @Autowired
-    public LessonService(LessonRepository lessonRepository) {
-        this.lessonRepository = lessonRepository;
-    }
+    List<LessonDTO> findAll();
+
+    List<LessonDTO> findByTopic(LessonTopicDTO lessonTopicDTO);
+
+    List<LessonDTO> findByContentType(LessonContentDTO lessonContentDTO);
+
+    LessonDTO update(LessonDTO lessonDTO);
+
+    void delete(Long lessonId);
 }
