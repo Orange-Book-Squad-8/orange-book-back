@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SectionRemoveLessonDTO {
-    private Long sessionId;
-    private Long lessonId;
+public class SectionCreateDTO {
+    private String name;
 }

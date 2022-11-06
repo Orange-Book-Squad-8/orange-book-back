@@ -1,6 +1,5 @@
 package com.bookorange.api.dto.appuserDto;
 
-import com.bookorange.api.domain.Role;
 import com.bookorange.api.enumerator.ContentType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +19,5 @@ public class UserCreateDTO {
 
     private ContentType contentType;
 
-    private Role role;
+    private String role;
 }
