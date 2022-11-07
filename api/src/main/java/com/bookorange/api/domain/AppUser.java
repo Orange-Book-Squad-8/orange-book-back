@@ -1,6 +1,6 @@
 package com.bookorange.api.domain;
 
-import com.bookorange.api.enumerator.ContentType;
+import com.bookorange.api.enumerator.StackCategories;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +27,8 @@ public class AppUser {
 
     private String email;
 
-    private ContentType contentType;
+    @ElementCollection
+    private List<StackCategories> stackCategories;
 
     @ElementCollection
     private List<String> badges;
@@ -100,5 +101,18 @@ public class AppUser {
         if (badge == null) throw new IllegalArgumentException("badge cannot be null");
         if (!badges.contains(badge)) throw new IllegalArgumentException("badge does not exist");
         badges.remove(badge);
+    }
+
+    public void addStackCategory(StackCategories stackCategory) {
+        if (stackCategory == null) throw new IllegalArgumentException("stackCategory cannot be null");
+        if (stackCategories.contains(stackCategory)) throw new IllegalArgumentException("stackCategory already exists");
+        stackCategories.add(stackCategory);
+    }
+
+    public void removeStackCategory(StackCategories stackCategory) {
+        if (stackCategory == null) throw new IllegalArgumentException("stackCategory cannot be null");
+        if (!stackCategories.contains(stackCategory))
+            throw new IllegalArgumentException("stackCategory does not exist");
+        stackCategories.remove(stackCategory);
     }
 }
