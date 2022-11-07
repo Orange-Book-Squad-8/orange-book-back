@@ -4,7 +4,6 @@ import com.bookorange.api.domain.AppUser;
 import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.*;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
-import com.bookorange.api.service.WatchedListService;
 import com.bookorange.api.service.implementation.AppUserServiceImp;
 import com.bookorange.api.service.implementation.RoleServiceImp;
 import com.bookorange.api.service.implementation.WatchedListServiceImp;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
+@RestController
+@RequestMapping(value = "/users")
 public class AppUserController {
 
     @Autowired
@@ -26,7 +27,6 @@ public class AppUserController {
 
     @Autowired
     private WatchedListServiceImp watchedListServiceImp;
-
 
 
     @PostMapping(value = "/create")
