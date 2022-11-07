@@ -2,7 +2,7 @@ package com.bookorange.api.dto.appuserDto;
 
 import com.bookorange.api.domain.AppUser;
 import com.bookorange.api.domain.Role;
-import com.bookorange.api.enumerator.ContentType;
+import com.bookorange.api.enumerator.StackCategories;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class AppUserDTO {
 
     private String email;
 
-    private ContentType contentType;
+    private List<StackCategories> stackCategories;
 
     private List<String> badges;
 
@@ -29,7 +29,7 @@ public class AppUserDTO {
         id = user.getId();
         username = user.getUsername();
         email = user.getEmail();
-        contentType = user.getContentType();
+        stackCategories = user.getStackCategories();
         badges = user.getBadges();
         role = user.getRole();
     }

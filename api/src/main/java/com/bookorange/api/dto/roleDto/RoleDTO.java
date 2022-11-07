@@ -12,11 +12,9 @@ public class RoleDTO {
 
     private Long id;
     private String roleName;
-    private Long roleId;
 
     public RoleDTO(Role role) {
         id = role.getId();
         roleName = role.getName();
-        roleId = role.getId();
     }
 }

@@ -26,7 +26,7 @@ public class AppUserServiceImp implements AppUserService {
         AppUser user = new AppUser();
         user.setUsername(userCreateDTO.getUsername());
         user.setEmail(userCreateDTO.getEmail());
-        user.setContentType(userCreateDTO.getContentType());
+        user.setStackCategories(userCreateDTO.getStackCategories());
         user.setRole(role);
         return appUserRepository.save(user);
     }
@@ -38,7 +38,7 @@ public class AppUserServiceImp implements AppUserService {
         user.setBadges(appUserDTO.getBadges());
         user.setEmail(appUserDTO.getEmail());
         user.setUsername(appUserDTO.getUsername());
-        user.setContentType(appUserDTO.getContentType());
+        user.setStackCategories(appUserDTO.getStackCategories());
         return appUserRepository.save(user);
     }
 

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,65 +29,65 @@ public class AppUser {
     private String email;
 
     @ElementCollection
-    private List<StackCategories> stackCategories;
+    private List<StackCategories> stackCategories = new ArrayList<>();
 
     @ElementCollection
-    private List<String> badges;
+    private List<String> badges = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Role role;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Course> subscribedCourses;
+    private List<Course> subscribedCourses = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Course> archivedCourses;
+    private List<Course> archivedCourses = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Course> myCourses;
+    private List<Course> myCourses = new ArrayList<>();
 
     public void addSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (subscribedCourses.contains(course)) throw new IllegalStateException("course already subscribed");
-        getSubscribedCourses().add(course);
+        if (subscribedCourses.contains(course)) throw new IllegalArgumentException("course already subscribed");
+        subscribedCourses.add(course);
     }
 
     public void removeSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (!subscribedCourses.contains(course)) throw new IllegalStateException("course not subscribed yet");
+        if (!subscribedCourses.contains(course)) throw new IllegalArgumentException("course not subscribed yet");
         getSubscribedCourses().remove(course);
     }
 
     public void addArchivedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (archivedCourses.contains(course)) throw new IllegalStateException("course already archived");
-        getArchivedCourses().add(course);
+        if (archivedCourses.contains(course)) throw new IllegalArgumentException("course already archived");
+        archivedCourses.add(course);
     }
 
     public void removeArchivedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (!archivedCourses.contains(course)) throw new IllegalStateException("course not archived yet");
-        getArchivedCourses().remove(course);
+        if (!archivedCourses.contains(course)) throw new IllegalArgumentException("course not archived yet");
+        archivedCourses.remove(course);
     }
 
     public void addMyCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (!myCourses.contains(course)) throw new IllegalStateException("course already created");
-        getMyCourses().add(course);
+        if (myCourses.contains(course)) throw new IllegalArgumentException("course already created");
+        myCourses.add(course);
     }
 
     public void removeMyCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (!myCourses.contains(course)) throw new IllegalStateException("course does not exist");
-        getMyCourses().remove(course);
+        if (!myCourses.contains(course)) throw new IllegalArgumentException("course does not exist");
+        myCourses.remove(course);
     }
 
     public void finishCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
-        if (!subscribedCourses.contains(course)) throw new IllegalStateException("course not subscribed");
+        if (!subscribedCourses.contains(course)) throw new IllegalArgumentException("course not subscribed");
         removeSubscribedCourse(course);
         addArchivedCourse(course);
     }

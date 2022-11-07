@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -21,17 +22,17 @@ public class Section {
     private String name;
 
     @OneToMany
-    private List<Lesson> lessons;
+    private List<Lesson> lessons = new ArrayList<>();
 
     public void addLesson(Lesson lesson) {
-        if (lessons == null) throw new IllegalArgumentException("lesson cannot be null");
+        if (lesson == null) throw new IllegalArgumentException("lesson cannot be null");
         if (lessons.contains(lesson)) throw new IllegalArgumentException("lesson already exists");
         getLessons().add(lesson);
     }
 
     public void removeLesson(Lesson lesson) {
-        if (lessons == null) throw new IllegalArgumentException("lesson cannot be null");
-        if (!lessons.contains(lesson)) throw new IllegalArgumentException("lesson does not exists");
+        if (lesson == null) throw new IllegalArgumentException("lesson cannot be null");
+        if (!lessons.contains(lesson)) throw new IllegalArgumentException("lesson does not exist");
         getLessons().remove(lesson);
     }
 

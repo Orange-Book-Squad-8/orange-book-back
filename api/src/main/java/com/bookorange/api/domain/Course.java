@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -33,21 +34,21 @@ public class Course {
     private Boolean visible = true;
 
     @OneToMany
-    private List<Section> sections;
+    private List<Section> sections = new ArrayList<>();
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();
     }
 
     public void addSection(Section section) {
-        if (section == null) throw new IllegalArgumentException("Section cannot be null");
-        if (sections.contains(section)) throw new IllegalArgumentException("Section already exists");
+        if (section == null) throw new IllegalArgumentException("section cannot be null");
+        if (sections.contains(section)) throw new IllegalArgumentException("section already exists");
         sections.add(section);
     }
 
     public void removeSection(Section section) {
-        if (section == null) throw new IllegalArgumentException("Section cannot be null");
-        if (sections.contains(section)) throw new IllegalArgumentException("Section does not exist");
+        if (section == null) throw new IllegalArgumentException("section cannot be null");
+        if (!sections.contains(section)) throw new IllegalArgumentException("section does not exist");
         sections.remove(section);
     }
 
