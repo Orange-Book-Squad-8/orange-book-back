@@ -2,6 +2,7 @@ package com.bookorange.api.service.implementation;
 
 import com.bookorange.api.domain.AppUser;
 import com.bookorange.api.domain.Role;
+import com.bookorange.api.dto.appuserDto.AppUserCourseEditDTO;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
 import com.bookorange.api.repository.AppUserRepository;
@@ -60,6 +61,55 @@ public class AppUserServiceImp implements AppUserService {
     @Override
     public void remove(Long userId) {
         appUserRepository.deleteById(userId);
+    }
+
+    @Override
+    public void addSubscribedCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.addSubscribedCourse(userDto.getCourse());
+        appUserRepository.save(user);
+    }
+
+    @Override
+    public void removeSubscribedCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.removeSubscribedCourse(userDto.getCourse());
+        appUserRepository.save(user);
+    }
+
+    @Override
+    public void addArchivedCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.addArchivedCourse(userDto.getCourse());
+        appUserRepository.save(user);
+    }
+
+    @Override
+    public void removeArchivedCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.removeArchivedCourse(userDto.getCourse());
+        appUserRepository.save(user);
+    }
+
+    @Override
+    public void addMyCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.addMyCourse(userDto.getCourse());
+        appUserRepository.save(user);
+    }
+
+    @Override
+    public void removeMyCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.removeMyCourse(userDto.getCourse());
+        appUserRepository.save(user);
+    }
+
+    @Override
+    public void finishCourse(AppUserCourseEditDTO userDto) {
+        AppUser user = findById(userDto.getId());
+        user.finishCourse(userDto.getCourse());
+        appUserRepository.save(user);
     }
 
 }
