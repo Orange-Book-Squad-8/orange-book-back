@@ -84,6 +84,7 @@ public class CourseServiceImp implements CourseService {
     public void removeSection(CourseSectionEditDTO courseSectionEditDTO) {
         Course course = findById(courseSectionEditDTO.getId());
         course.removeSection(courseSectionEditDTO.getSection());
+        courseRepository.save(course);
     }
 
     @Override
