@@ -40,11 +40,13 @@ public class Course {
     }
 
     public void addSection(Section section) {
+        if (section == null) throw new IllegalArgumentException("Section cannot be null");
         if (sections.contains(section)) throw new IllegalArgumentException("Section already exists");
         sections.add(section);
     }
 
     public void removeSection(Section section) {
+        if (section == null) throw new IllegalArgumentException("Section cannot be null");
         if (sections.contains(section)) throw new IllegalArgumentException("Section does not exist");
         sections.remove(section);
     }

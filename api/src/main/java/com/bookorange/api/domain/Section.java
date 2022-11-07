@@ -25,11 +25,13 @@ public class Section {
 
     public void addLesson(Lesson lesson) {
         if (lessons == null) throw new IllegalArgumentException("lesson cannot be null");
+        if (lessons.contains(lesson)) throw new IllegalArgumentException("lesson already exists");
         getLessons().add(lesson);
     }
 
     public void removeLesson(Lesson lesson) {
         if (lessons == null) throw new IllegalArgumentException("lesson cannot be null");
+        if (!lessons.contains(lesson)) throw new IllegalArgumentException("lesson does not exists");
         getLessons().remove(lesson);
     }
 
