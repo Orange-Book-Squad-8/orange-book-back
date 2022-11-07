@@ -49,47 +49,56 @@ public class AppUser {
 
     public void addSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (subscribedCourses.contains(course)) throw new IllegalStateException("course already subscribed");
         getSubscribedCourses().add(course);
     }
 
     public void removeSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (!subscribedCourses.contains(course)) throw new IllegalStateException("course not subscribed yet");
         getSubscribedCourses().remove(course);
     }
 
     public void addArchivedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (archivedCourses.contains(course)) throw new IllegalStateException("course already archived");
         getArchivedCourses().add(course);
     }
 
     public void removeArchivedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (!archivedCourses.contains(course)) throw new IllegalStateException("course not archived yet");
         getArchivedCourses().remove(course);
     }
 
     public void addMyCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (!myCourses.contains(course)) throw new IllegalStateException("course already created");
         getMyCourses().add(course);
     }
 
     public void removeMyCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (!myCourses.contains(course)) throw new IllegalStateException("course does not exist");
         getMyCourses().remove(course);
     }
 
     public void finishCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");
+        if (!subscribedCourses.contains(course)) throw new IllegalStateException("course not subscribed");
         removeSubscribedCourse(course);
         addArchivedCourse(course);
     }
 
     public void addBadge(String badge) {
         if (badge == null) throw new IllegalArgumentException("badge cannot be null");
+        if (badges.contains(badge)) throw new IllegalArgumentException("badge already exists");
         badges.add(badge);
     }
 
     public void removeBadge(String badge) {
         if (badge == null) throw new IllegalArgumentException("badge cannot be null");
+        if (!badges.contains(badge)) throw new IllegalArgumentException("badge does not exist");
         badges.remove(badge);
     }
 }
