@@ -21,7 +21,7 @@ public class Section {
 
     private String name;
 
-    @OneToMany
+    @ManyToMany
     private List<Lesson> lessons = new ArrayList<>();
 
     public void addLesson(Lesson lesson) {
