@@ -1,5 +1,7 @@
 package com.bookorange.api.dto.watchedDto;
 
+import com.bookorange.api.domain.AppUser;
+import com.bookorange.api.domain.Lesson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class WatchedLessonDTO {
-    private Long userId;
-    private Long lessonId;
+    private AppUser user;
+    private Lesson lesson;
 }

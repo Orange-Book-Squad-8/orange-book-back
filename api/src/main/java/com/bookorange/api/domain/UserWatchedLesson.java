@@ -5,14 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "watched_table")
+@Table(name = "TB_WATCHED")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WatchedList {
+public class UserWatchedLesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,7 +25,5 @@ public class WatchedList {
 
     private Boolean watched = false;
 
-    private Boolean lastWatched = false;
-
-    private Date removedAt;
+    private LocalDate removedAt;
 }
