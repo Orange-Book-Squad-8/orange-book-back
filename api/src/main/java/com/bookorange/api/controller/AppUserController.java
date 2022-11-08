@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -83,9 +84,9 @@ public class AppUserController {
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable Long id) {
         try {
             AppUser user = appUserService.findById(id);
-            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO();
-            userCourseDTO.setMyCourses(user.getMyCourses());
-            // VOLTAR AQUI - CURSOS ASSISTIDOS NÃO ESTÃO RETORNANDO
+            List<Long> watchedList = watchedListService.getWatchedLessonList(id);
+            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
+
             return ResponseEntity.ok(userCourseDTO);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());

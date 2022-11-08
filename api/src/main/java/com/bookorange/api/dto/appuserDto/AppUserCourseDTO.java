@@ -2,7 +2,6 @@ package com.bookorange.api.dto.appuserDto;
 
 import com.bookorange.api.domain.AppUser;
 import com.bookorange.api.domain.Course;
-import com.bookorange.api.dto.watchedDto.WatchedLessonListDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,14 +21,11 @@ public class AppUserCourseDTO {
     private List<Course> myCourses = new ArrayList<>();
 
     private List<Long> watchedLesson;
-
-    private Long lastWatched;
-
-    public AppUserCourseDTO(AppUser user, WatchedLessonListDTO list) {
+    
+    public AppUserCourseDTO(AppUser user, List<Long> watchedLesson) {
         this.subscribedCourses = user.getSubscribedCourses();
         this.archivedCourses = user.getArchivedCourses();
         this.myCourses = user.getMyCourses();
-        this.watchedLesson = list.getWatchedLesson();
-        this.lastWatched = list.getLastWatched();
+        this.watchedLesson = watchedLesson;
     }
 }

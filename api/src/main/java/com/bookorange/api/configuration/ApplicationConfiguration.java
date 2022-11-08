@@ -8,7 +8,7 @@ import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,17 +17,13 @@ import java.util.List;
 
 @Configuration
 @EnableJpaRepositories("com.bookorange.api.repository")
+@AllArgsConstructor
 public class ApplicationConfiguration {
 
-    @Autowired
     AppUserRepository appUserRepository;
-    @Autowired
     CourseRepository courseRepository;
-    @Autowired
     LessonRepository lessonRepository;
-    @Autowired
     RoleRepository roleRepository;
-    @Autowired
     SectionRepository sectionRepository;
 
 
