@@ -6,8 +6,8 @@ import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.*;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
 import com.bookorange.api.service.AppUserService;
+import com.bookorange.api.service.AppUserWatchedLessonService;
 import com.bookorange.api.service.RoleService;
-import com.bookorange.api.service.WatchedListService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +19,11 @@ import java.util.Objects;
 @RequestMapping(value = "/users")
 @AllArgsConstructor
 public class AppUserController {
-
     private final AppUserService appUserService;
 
     private final RoleService roleService;
 
-    private final WatchedListService watchedListService;
-
+    private final AppUserWatchedLessonService watchedListService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@RequestBody UserCreateDTO userCreateDTO) {

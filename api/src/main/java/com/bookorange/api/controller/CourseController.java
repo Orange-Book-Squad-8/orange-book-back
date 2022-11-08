@@ -5,7 +5,6 @@ import com.bookorange.api.domain.Course;
 import com.bookorange.api.dto.courseDto.CourseCreateDTO;
 import com.bookorange.api.dto.courseDto.CourseDTO;
 import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
-import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.service.CourseService;
@@ -20,8 +19,6 @@ import java.util.List;
 @RequestMapping(value = "/courses")
 @AllArgsConstructor
 public class CourseController {
-
-
     private final CourseService courseService;
 
     @PostMapping(value = "/create")
@@ -69,16 +66,6 @@ public class CourseController {
         try {
             List<Course> coursesByDifficulty = courseService.findByDifficulty(difficulty);
             return ResponseEntity.ok(coursesByDifficulty);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @GetMapping(value = "/{content}")
-    public ResponseEntity<List<Course>> listByContentType(@PathVariable("content") ContentType content) {
-        try {
-            List<Course> coursesByContentType = courseService.findByContentType(content);
-            return ResponseEntity.ok(coursesByContentType);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
