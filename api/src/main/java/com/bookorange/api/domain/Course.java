@@ -43,6 +43,8 @@ public class Course {
     public void addSection(Section section) {
         if (section == null) throw new IllegalArgumentException("section cannot be null");
         if (sections.contains(section)) throw new IllegalArgumentException("section already exists");
+        if (sections.stream().map(Section::getName).toList().contains(section.getName()))
+            throw new IllegalArgumentException("section name already exists in this course");
         sections.add(section);
     }
 
