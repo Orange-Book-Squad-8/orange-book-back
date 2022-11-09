@@ -31,7 +31,6 @@ public class SectionServiceImp implements SectionService {
     public Section update(SectionDTO sectionDTO) {
         Section section = findById(sectionDTO.getId());
         section.setName(sectionDTO.getName());
-        section.setLessons(sectionDTO.getLessons());
         return sectionRepository.save(section);
     }
 

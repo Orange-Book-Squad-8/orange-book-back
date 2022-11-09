@@ -102,11 +102,6 @@
                             <jsonLibrary>jackson2</jsonLibrary>
                             <outputFile>target/rest.d.ts</outputFile>
                             <outputKind>global</outputKind>
-                            <classPatterns>
-                                <pattern>com.bookorange.api.dto.*</pattern>
-                                <pattern>com.bookorange.api.enumerator.*</pattern>
-                            </classPatterns>
-
                         </configuration>
                     </execution>
                 </executions>
@@ -116,6 +111,12 @@
                         <pattern>com.bookorange.api.dto.**</pattern>
                         <pattern>com.bookorange.api.enumerator.*</pattern>
                     </classPatterns>
+                    <excludeClasses>
+                        <class>com.bookorange.api.dto.appuserDto.AppUserCourseEditDTO</class>
+                        <class>com.bookorange.api.dto.courseDto.CourseSectionEditDTO</class>
+                        <class>com.bookorange.api.dto.sectionDto.SectionEditLessonDTO</class>
+                        <class>com.bookorange.api.dto.watchedDto.WatchedLessonDTO</class>
+                    </excludeClasses>
                     <outputKind>module</outputKind>
                 </configuration>
             </plugin>
