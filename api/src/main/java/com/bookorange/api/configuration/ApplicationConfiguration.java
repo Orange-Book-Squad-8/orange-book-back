@@ -1,9 +1,6 @@
 package com.bookorange.api.configuration;
 
-import com.bookorange.api.domain.Course;
-import com.bookorange.api.domain.Lesson;
-import com.bookorange.api.domain.Role;
-import com.bookorange.api.domain.Section;
+import com.bookorange.api.domain.*;
 import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
@@ -128,15 +125,15 @@ public class ApplicationConfiguration {
         roleRepository.save(userRole);
         roleRepository.save(admRole);
 
-        /*
+
         AppUser user = new AppUser();
+
         user.setUsername("user");
         user.setPassword("password");
         user.setEmail("email@email.com");
         user.setStackCategories(List.of(StackCategories.UI, StackCategories.UX));
         user.setBadges(List.of("Java"));
         user.setRole(userRole);
-        user.setSubscribedCourses(List.of(course1));
 
         appUserRepository.save(user);
 
@@ -149,9 +146,7 @@ public class ApplicationConfiguration {
         adm.setRole(admRole);
 
         appUserRepository.save(adm);
-
-         */
-
+        
     }
 
     @Bean

@@ -24,9 +24,7 @@ public class AppUserController {
     private final AppUserService appUserService;
     private final CourseService courseService;
     private final LessonService lessonService;
-
     private final RoleService roleService;
-
     private final AppUserWatchedLessonService watchedListService;
 
     @PostMapping(value = "/create")
@@ -40,8 +38,8 @@ public class AppUserController {
         }
     }
 
-    @PutMapping(value = "/{appUserId}/edit")
-    public ResponseEntity<AppUserDTO> editAppUser(@RequestBody AppUserDTO appUserDTO, @PathVariable("appUserId") Long appUserId) {
+    @PutMapping(value = "/edit")
+    public ResponseEntity<AppUserDTO> editAppUser(@RequestBody AppUserDTO appUserDTO) {
         try {
             AppUser editedUser = appUserService.update(appUserDTO);
             return ResponseEntity.ok(new AppUserDTO(editedUser));
