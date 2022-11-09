@@ -9,17 +9,22 @@ import com.bookorange.api.dto.appuserDto.*;
 import com.bookorange.api.dto.watchedDto.SetWatchedLessonDTO;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
 import com.bookorange.api.service.*;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/users")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AppUserController {
     private final AppUserService appUserService;
     private final CourseService courseService;
@@ -28,7 +33,7 @@ public class AppUserController {
     private final AppUserWatchedLessonService watchedListService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<AppUserDTO> createAppUser(@RequestBody UserCreateDTO userCreateDTO) {
+    public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
         try {
             Role role = roleService.findByName(userCreateDTO.getRole());
             AppUser createdAppUser = appUserService.create(userCreateDTO, role);
@@ -175,5 +180,18 @@ public class AppUserController {
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 }

@@ -12,9 +12,14 @@ import com.bookorange.api.service.SectionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/courses")
@@ -24,7 +29,7 @@ public class CourseController {
     private final SectionService sectionService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseCreateDTO courseCreateDTO) {
+    public ResponseEntity<CourseDTO> createCourse(@Valid @RequestBody CourseCreateDTO courseCreateDTO) {
         try {
             Course courseCreated = courseService.create(courseCreateDTO);
             return ResponseEntity.ok(new CourseDTO(courseCreated));
@@ -134,5 +139,18 @@ public class CourseController {
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 }
