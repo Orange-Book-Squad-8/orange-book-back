@@ -31,8 +31,10 @@ public class Course {
     @NotBlank(message = "field not found")
     private String creator;
 
+    @NotBlank(message = "field not found")
     private StackCategories category;
 
+    @NotBlank(message = "field not found")
     private Difficulty difficulty;
 
     private Boolean visible = true;

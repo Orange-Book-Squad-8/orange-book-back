@@ -36,6 +36,8 @@ public class Lesson {
 
     @NotBlank(message = "field not found")
     private String topic;
+
+    @NotBlank(message = "field not found")
     private ContentType contentType;
 
     @Positive

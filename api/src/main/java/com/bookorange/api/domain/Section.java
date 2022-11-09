@@ -23,6 +23,7 @@ public class Section {
     @NotBlank(message = "field not found")
     private String name;
 
+    
     @ManyToMany
     private List<Lesson> lessons = new ArrayList<>();
 

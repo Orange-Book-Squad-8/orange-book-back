@@ -22,7 +22,8 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
+    @Column(unique = true)
     @NotBlank(message = "field not found")
     @Length(min = 3, max = 30)
     private String username;
@@ -31,16 +32,19 @@ public class AppUser {
     @Length(min = 6, message = "password must contain at least 6 characters")
     private String password;
 
+    @Column(unique = true)
     @NotBlank(message = "field not found")
     @Email(message = "email not valid")
     private String email;
 
+    @NotBlank(message = "field not found")
     @ElementCollection
     private List<StackCategories> stackCategories = new ArrayList<>();
 
     @ElementCollection
     private List<String> badges = new ArrayList<>();
 
+    @NotBlank(message = "field not found")
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
 
