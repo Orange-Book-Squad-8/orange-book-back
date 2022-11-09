@@ -31,7 +31,6 @@ public class SectionController {
         }
     }
 
-
     @PostMapping(value = "/new_lesson")
     public ResponseEntity<Section> addLesson(@RequestBody SectionAddLessonDTO sectionEditLessonDTO) {
         try {
