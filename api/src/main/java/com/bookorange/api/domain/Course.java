@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +32,10 @@ public class Course {
     @NotBlank(message = "field not found")
     private String creator;
 
-    @NotBlank(message = "field not found")
+    @NotNull
     private StackCategories category;
 
-    @NotBlank(message = "field not found")
+    @NotNull
     private Difficulty difficulty;
 
     private Boolean visible = true;

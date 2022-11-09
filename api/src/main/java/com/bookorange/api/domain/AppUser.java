@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,14 +38,14 @@ public class AppUser {
     @Email(message = "email not valid")
     private String email;
 
-    @NotBlank(message = "field not found")
+    @NotNull
     @ElementCollection
     private List<StackCategories> stackCategories = new ArrayList<>();
 
     @ElementCollection
     private List<String> badges = new ArrayList<>();
 
-    @NotBlank(message = "field not found")
+    @NotNull
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
 

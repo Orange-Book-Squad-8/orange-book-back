@@ -49,40 +49,44 @@ public class CourseController {
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<List<Course>> findAll() {
+    public ResponseEntity<List<CourseDTO>> findAll() {
         try {
             List<Course> allCourses = courseService.findAll();
-            return ResponseEntity.ok(allCourses);
+            List<CourseDTO> collect = allCourses.stream().map(CourseDTO::new).toList();
+            return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
 
     @GetMapping(value = "/category/{category}")
-    public ResponseEntity<List<Course>> listByCategory(@PathVariable("category") StackCategories category) {
+    public ResponseEntity<List<CourseDTO>> listByCategory(@PathVariable("category") StackCategories category) {
         try {
             List<Course> coursesByCategory = courseService.findByCategory(category);
-            return ResponseEntity.ok(coursesByCategory);
+            List<CourseDTO> collect = coursesByCategory.stream().map(CourseDTO::new).toList();
+            return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
 
     @GetMapping(value = "/difficulty/{difficulty}")
-    public ResponseEntity<List<Course>> listByDifficulty(@PathVariable("difficulty") Difficulty difficulty) {
+    public ResponseEntity<List<CourseDTO>> listByDifficulty(@PathVariable("difficulty") Difficulty difficulty) {
         try {
             List<Course> coursesByDifficulty = courseService.findByDifficulty(difficulty);
-            return ResponseEntity.ok(coursesByDifficulty);
+            List<CourseDTO> collect = coursesByDifficulty.stream().map(CourseDTO::new).toList();
+            return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
 
     @GetMapping(value = "/creator/{creator}")
-    public ResponseEntity<List<Course>> listByDifficulty(@PathVariable("creator") String creator) {
+    public ResponseEntity<List<CourseDTO>> listByCreator(@PathVariable("creator") String creator) {
         try {
-            List<Course> coursesByDifficulty = courseService.findByCreator(creator);
-            return ResponseEntity.ok(coursesByDifficulty);
+            List<Course> coursesByCreator = courseService.findByCreator(creator);
+            List<CourseDTO> collect = coursesByCreator.stream().map(CourseDTO::new).toList();
+            return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
