@@ -25,7 +25,7 @@ public class LessonController {
     private final LessonService lessonService;
 
     @PostMapping(value = "/lessons")
-    public ResponseEntity<LessonDTO> createLesson(@RequestBody LessonCreateDTO lessonCreateDTO) {
+    public ResponseEntity<LessonDTO> createLesson(@Valid @RequestBody LessonCreateDTO lessonCreateDTO) {
         try {
             Lesson lessonCreated = lessonService.create(lessonCreateDTO);
             return ResponseEntity.ok(new LessonDTO(lessonCreated));
@@ -75,7 +75,7 @@ public class LessonController {
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Lesson> updateLesson(@RequestBody LessonDTO lessonDTO) {
+    public ResponseEntity<Lesson> updateLesson(@Valid @RequestBody LessonDTO lessonDTO) {
         try {
             Lesson lessonUpdate = lessonService.update(lessonDTO);
             return ResponseEntity.ok(lessonUpdate);
@@ -85,7 +85,7 @@ public class LessonController {
     }
 
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Void> deleteLesson(@Valid @RequestParam("lessonId") Long lessonId) {
+    public ResponseEntity<Void> deleteLesson(@RequestParam("lessonId") Long lessonId) {
         try {
             lessonService.delete(lessonId);
             return ResponseEntity.ok().build();

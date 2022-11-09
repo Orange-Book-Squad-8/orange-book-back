@@ -44,7 +44,7 @@ public class AppUserController {
     }
 
     @PutMapping(value = "/edit")
-    public ResponseEntity<AppUserDTO> editAppUser(@RequestBody AppUserDTO appUserDTO) {
+    public ResponseEntity<AppUserDTO> editAppUser(@Valid @RequestBody AppUserDTO appUserDTO) {
         try {
             AppUser editedUser = appUserService.update(appUserDTO);
             return ResponseEntity.ok(new AppUserDTO(editedUser));

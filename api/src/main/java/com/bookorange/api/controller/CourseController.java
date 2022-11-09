@@ -89,7 +89,7 @@ public class CourseController {
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Course> updateCourse(@RequestBody CourseDTO courseDTO) {
+    public ResponseEntity<Course> updateCourse(@Valid @RequestBody CourseDTO courseDTO) {
         try {
             Course courseUpdate = courseService.update(courseDTO);
             return ResponseEntity.ok(courseUpdate);

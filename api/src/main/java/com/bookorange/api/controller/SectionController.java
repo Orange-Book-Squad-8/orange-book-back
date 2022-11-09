@@ -28,7 +28,7 @@ public class SectionController {
 
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Section> updateSection(@RequestBody SectionDTO sectionDTO) {
+    public ResponseEntity<Section> updateSection(@Valid @RequestBody SectionDTO sectionDTO) {
         try {
             Section sectionUpdate = sectionService.update(sectionDTO);
             return ResponseEntity.ok(sectionUpdate);
@@ -49,7 +49,7 @@ public class SectionController {
     }
 
     @DeleteMapping(value = "/remove_lesson")
-    public ResponseEntity<Void> removeLesson(@Valid @RequestBody SectionAddLessonDTO sectionEditLessonDTO) {
+    public ResponseEntity<Void> removeLesson(@RequestBody SectionAddLessonDTO sectionEditLessonDTO) {
         try {
             Lesson lesson = lessonService.findById(sectionEditLessonDTO.getLessonId());
             sectionService.removeLesson(new SectionEditLessonDTO(sectionEditLessonDTO.getSectionId(), lesson));
