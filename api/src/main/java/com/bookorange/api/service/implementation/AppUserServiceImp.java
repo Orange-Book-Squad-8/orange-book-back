@@ -35,7 +35,7 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser update(AppUserDTO appUserDTO) {
-        AppUser user = appUserRepository.findByUsername(appUserDTO.getUsername());
+        AppUser user = findById(appUserDTO.getId());
         user.setRole(appUserDTO.getRole());
         user.setBadges(appUserDTO.getBadges());
         user.setEmail(appUserDTO.getEmail());
