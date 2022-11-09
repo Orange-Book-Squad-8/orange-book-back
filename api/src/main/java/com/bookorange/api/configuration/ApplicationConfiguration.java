@@ -31,8 +31,8 @@ public class ApplicationConfiguration {
         lesson1.setTitle("lessonTitle");
         lesson1.setDescription("lessonDescription");
         lesson1.setAuthor("lesson author");
-        lesson1.setLink("lesson link");
-        lesson1.setLink("lesson topic");
+        lesson1.setLink("https://dev.to/vitordevsp/padronizacao-de-commit-com-commitlint-husky-e-commitizen-3g1n");
+        lesson1.setTopic("lesson topic");
         lesson1.setContentType(ContentType.ARTICLE);
         lesson1.setDurationInMinutes(5);
 
@@ -40,8 +40,8 @@ public class ApplicationConfiguration {
         lesson2.setTitle("lesson2 Title");
         lesson2.setDescription("lesson2 Description");
         lesson2.setAuthor("lesson2 author");
-        lesson2.setLink("lesson2 link");
-        lesson2.setLink("lesson2 topic");
+        lesson2.setLink("https://dev.to/vitordevsp/padronizacao-de-commit-com-commitlint-husky-e-commitizen-3g1n");
+        lesson2.setTopic("lesson2 topic");
         lesson2.setContentType(ContentType.VIDEO);
         lesson2.setDurationInMinutes(2);
 
@@ -139,14 +139,14 @@ public class ApplicationConfiguration {
 
         AppUser adm = new AppUser();
         adm.setUsername("admin");
-        adm.setPassword("admin");
+        adm.setPassword("password");
         adm.setEmail("admin@email.com");
         adm.setStackCategories(List.of(StackCategories.FRONT_END, StackCategories.FULLSTACK));
         adm.setBadges(List.of("Java"));
         adm.setRole(admRole);
 
         appUserRepository.save(adm);
-        
+
     }
 
     @Bean
