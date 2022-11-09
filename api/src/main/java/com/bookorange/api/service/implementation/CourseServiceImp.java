@@ -64,7 +64,6 @@ public class CourseServiceImp implements CourseService {
         course.setCategory(courseDTO.getCategory());
         course.setDifficulty(courseDTO.getDifficulty());
         course.setVisible(courseDTO.getVisible());
-        course.setSections(courseDTO.getSections());
         return courseRepository.save(course);
     }
 

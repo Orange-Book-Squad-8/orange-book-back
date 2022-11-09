@@ -26,6 +26,7 @@ public class AppUserServiceImp implements AppUserService {
     public AppUser create(UserCreateDTO userCreateDTO, Role role) {
         AppUser user = new AppUser();
         user.setUsername(userCreateDTO.getUsername());
+        user.setPassword(userCreateDTO.getPassword());
         user.setEmail(userCreateDTO.getEmail());
         user.setStackCategories(userCreateDTO.getStackCategories());
         user.setRole(role);

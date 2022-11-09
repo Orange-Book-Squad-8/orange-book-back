@@ -2,12 +2,13 @@ package com.bookorange.api.controller;
 
 
 import com.bookorange.api.domain.AppUser;
+import com.bookorange.api.domain.Course;
+import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.*;
+import com.bookorange.api.dto.watchedDto.SetWatchedLessonDTO;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
-import com.bookorange.api.service.AppUserService;
-import com.bookorange.api.service.AppUserWatchedLessonService;
-import com.bookorange.api.service.RoleService;
+import com.bookorange.api.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class AppUserController {
     private final AppUserService appUserService;
+    private final CourseService courseService;
+    private final LessonService lessonService;
 
     private final RoleService roleService;
 
@@ -61,9 +64,11 @@ public class AppUserController {
     }
 
     @PutMapping("/watched")
-    public ResponseEntity<Void> setWatched(@RequestBody WatchedLessonDTO watchedLessonDTO) {
+    public ResponseEntity<Void> setWatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
         try {
-            watchedListService.setWatched(watchedLessonDTO);
+            Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
+            AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
+            watchedListService.setWatched(new WatchedLessonDTO(user, lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -71,9 +76,11 @@ public class AppUserController {
     }
 
     @PutMapping("/unwatched")
-    public ResponseEntity<Void> setUnwatched(@RequestBody WatchedLessonDTO watchedLessonDTO) {
+    public ResponseEntity<Void> setUnwatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
         try {
-            watchedListService.setUnwatched(watchedLessonDTO);
+            Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
+            AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
+            watchedListService.setUnwatched(new WatchedLessonDTO(user, lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -81,10 +88,11 @@ public class AppUserController {
     }
 
     @GetMapping("/{id}/courses")
-    public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable Long id) {
+    public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
+            System.out.println("oi");
             AppUser user = appUserService.findById(id);
-            List<Long> watchedList = watchedListService.getWatchedLessonList(id);
+            List<Long> watchedList = watchedListService.getWatchedLessonList(user);
             AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
 
             return ResponseEntity.ok(userCourseDTO);
@@ -94,20 +102,22 @@ public class AppUserController {
     }
 
 
-    @PostMapping(value = "/addSuscribedCourses")
-    public ResponseEntity<AppUserCourseEditDTO> addSubscribedCourses(@RequestBody AppUserCourseEditDTO userDTO) {
+    @PostMapping(value = "/addSubscribedCourses")
+    public ResponseEntity<Void> addSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.addSubscribedCourse(userDTO);
-            return ResponseEntity.ok(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.addSubscribedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    @DeleteMapping(value = "/removeSuscribedCourses")
-    public ResponseEntity<Void> removeSubscribedCourses(@RequestBody AppUserCourseEditDTO userDTO) {
+    @DeleteMapping(value = "/removeSubscribedCourses")
+    public ResponseEntity<Void> removeSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.removeSubscribedCourse(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.removeSubscribedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -115,19 +125,21 @@ public class AppUserController {
     }
 
     @PostMapping(value = "/addArchivedCourses")
-    public ResponseEntity<AppUserCourseEditDTO> addArchivedCourses(@RequestBody AppUserCourseEditDTO userDTO) {
+    public ResponseEntity<Void> addArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.addArchivedCourse(userDTO);
-            return ResponseEntity.ok(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.addArchivedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @DeleteMapping(value = "/removeArchivedCourses")
-    public ResponseEntity<Void> removeArchivedCourses(@RequestBody AppUserCourseEditDTO userDTO) {
+    public ResponseEntity<Void> removeArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.removeArchivedCourse(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.removeArchivedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -135,19 +147,21 @@ public class AppUserController {
     }
 
     @PostMapping(value = "/addMyCourses")
-    public ResponseEntity<AppUserCourseEditDTO> addMyCourses(@RequestBody AppUserCourseEditDTO userDTO) {
+    public ResponseEntity<Void> addMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.addMyCourse(userDTO);
-            return ResponseEntity.ok(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.addMyCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @DeleteMapping(value = "/removeMyCourses")
-    public ResponseEntity<Void> removeMyCourses(@RequestBody AppUserCourseEditDTO userDTO) {
+    public ResponseEntity<Void> removeMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.removeMyCourse(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.removeMyCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -155,10 +169,11 @@ public class AppUserController {
     }
 
     @PutMapping(value = "/finishCourses")
-    public ResponseEntity<AppUserCourseEditDTO> finishCourse(@RequestBody AppUserCourseEditDTO userDTO) {
+    public ResponseEntity<Void> finishCourse(@RequestBody AddCourseToUserDTO userDTO) {
         try {
-            appUserService.finishCourse(userDTO);
-            return ResponseEntity.ok(userDTO);
+            Course course = courseService.findById(userDTO.getCourseId());
+            appUserService.finishCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
