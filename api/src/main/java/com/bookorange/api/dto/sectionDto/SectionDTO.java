@@ -5,11 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class SectionDTO {
     private Long id;
+    @NotBlank(message = "field not found")
     private String name;
 
     public SectionDTO(Section section) {
