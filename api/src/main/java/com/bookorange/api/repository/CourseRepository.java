@@ -13,4 +13,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findByCategory(StackCategories category);
 
     List<Course> findByDifficulty(Difficulty difficulty);
+
+    List<Course> findByCreator(String creator);
 }

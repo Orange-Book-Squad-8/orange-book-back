@@ -56,6 +56,11 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
+    public List<Course> findByCreator(String creator) {
+        return courseRepository.findByCreator(creator);
+    }
+
+    @Override
     public Course update(CourseDTO courseDTO) {
         Course course = findById(courseDTO.getId());
         course.setTitle(courseDTO.getTitle());

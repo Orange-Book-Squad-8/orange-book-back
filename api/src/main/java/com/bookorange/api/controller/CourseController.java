@@ -73,6 +73,16 @@ public class CourseController {
         }
     }
 
+    @GetMapping(value = "/creator/{creator}")
+    public ResponseEntity<List<Course>> listByDifficulty(@PathVariable("creator") String creator) {
+        try {
+            List<Course> coursesByDifficulty = courseService.findByCreator(creator);
+            return ResponseEntity.ok(coursesByDifficulty);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @PutMapping(value = "/update")
     public ResponseEntity<Course> updateCourse(@RequestBody CourseDTO courseDTO) {
         try {

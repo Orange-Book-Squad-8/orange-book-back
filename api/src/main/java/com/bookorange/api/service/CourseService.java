@@ -20,6 +20,8 @@ public interface CourseService {
 
     List<Course> findByDifficulty(Difficulty difficulty);
 
+    List<Course> findByCreator(String creator);
+
     Course update(CourseDTO courseDTO);
 
     void delete(Long courseId);
