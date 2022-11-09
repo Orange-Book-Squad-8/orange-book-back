@@ -25,6 +25,8 @@ public class CourseDTO {
 
     private Boolean visible;
 
+    private Integer totalLessons;
+
 
     public CourseDTO(Course course) {
         id = course.getId();
@@ -34,5 +36,6 @@ public class CourseDTO {
         category = course.getCategory();
         difficulty = course.getDifficulty();
         visible = course.getVisible();
+        totalLessons = course.getTotalLessons();
     }
 }
