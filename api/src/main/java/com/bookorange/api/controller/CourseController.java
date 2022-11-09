@@ -2,12 +2,13 @@ package com.bookorange.api.controller;
 
 
 import com.bookorange.api.domain.Course;
-import com.bookorange.api.dto.courseDto.CourseCreateDTO;
-import com.bookorange.api.dto.courseDto.CourseDTO;
-import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
+import com.bookorange.api.domain.Section;
+import com.bookorange.api.dto.courseDto.*;
+import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.service.CourseService;
+import com.bookorange.api.service.SectionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CourseController {
     private final CourseService courseService;
+    private final SectionService sectionService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseCreateDTO courseCreateDTO) {
@@ -92,9 +94,10 @@ public class CourseController {
     }
 
     @PostMapping(value = "/new_section")
-    public ResponseEntity<Course> addSection(@RequestBody CourseSectionEditDTO courseSectionEditDTO) {
+    public ResponseEntity<Course> addSection(@RequestBody CourseCreateSectionDTO courseSectionEditDTO) {
         try {
-            courseService.addSection(courseSectionEditDTO);
+            Section section = sectionService.create(new SectionCreateDTO(courseSectionEditDTO.getSectionName()));
+            courseService.addSection(new CourseSectionEditDTO(courseSectionEditDTO.getCourseId(), section));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
@@ -102,9 +105,11 @@ public class CourseController {
     }
 
     @DeleteMapping(value = "/remove_section")
-    public ResponseEntity<Void> removeSection(@RequestBody CourseSectionEditDTO courseSectionEditDTO) {
+    public ResponseEntity<Void> removeSection(@RequestBody CourseRemoveSectionDTO courseSectionEditDTO) {
         try {
-            courseService.addSection(courseSectionEditDTO);
+            Section section = sectionService.findById(courseSectionEditDTO.getSectionId());
+            courseService.removeSection(new CourseSectionEditDTO(courseSectionEditDTO.getCourseId(), section));
+            sectionService.delete(courseSectionEditDTO.getSectionId());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
@@ -112,7 +117,7 @@ public class CourseController {
     }
 
     @GetMapping(value = "/duration/{id}")
-    public ResponseEntity<Integer> getCourseDuration(@RequestParam("courseId") Long courseId) {
+    public ResponseEntity<Integer> getCourseDuration(@PathVariable("id") Long courseId) {
         try {
             Integer courseDuration = courseService.getCourseDuration(courseId);
             return ResponseEntity.ok(courseDuration);
