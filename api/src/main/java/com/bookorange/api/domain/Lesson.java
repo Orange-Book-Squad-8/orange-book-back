@@ -10,6 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,12 +24,22 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "field not found")
     private String title;
+    @NotBlank(message = "field not found")
     private String description;
+    @NotBlank(message = "field not found")
     private String author;
+    @NotBlank(message = "field not found")
+    @Pattern(regexp = "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)")
     private String link;
+
+    @NotBlank(message = "field not found")
     private String topic;
     private ContentType contentType;
+
+    @Positive
+    @Min(1)
     private Integer durationInMinutes;
 
     @Override

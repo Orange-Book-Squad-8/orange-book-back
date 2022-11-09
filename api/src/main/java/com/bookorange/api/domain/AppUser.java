@@ -5,8 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +22,17 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
+    @NotBlank(message = "field not found")
+    @Length(min = 3, max = 30)
     private String username;
 
+    @NotBlank(message = "field not found")
+    @Length(min = 6, message = "password must contain at least 6 characters")
     private String password;
 
+    @NotBlank(message = "field not found")
+    @Email(message = "email not valid")
     private String email;
 
     @ElementCollection
