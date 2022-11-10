@@ -6,16 +6,14 @@ import com.bookorange.api.dto.lessonDto.LessonDTO;
 import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.service.LessonService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.HashMap;
+import java.net.URI;
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping(value = "/lessons")
@@ -24,11 +22,13 @@ public class LessonController {
 
     private final LessonService lessonService;
 
-    @PostMapping(value = "/lessons")
+    @PostMapping(value = "/create")
     public ResponseEntity<LessonDTO> createLesson(@Valid @RequestBody LessonCreateDTO lessonCreateDTO) {
         try {
             Lesson lessonCreated = lessonService.create(lessonCreateDTO);
-            return ResponseEntity.ok(new LessonDTO(lessonCreated));
+            URI uri = ServletUriComponentsBuilder
+                    .fromCurrentRequest().path("/create").buildAndExpand(lessonCreated.getId()).toUri();
+            return ResponseEntity.created(uri).build();
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
@@ -94,17 +94,5 @@ public class LessonController {
         }
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 
 }
