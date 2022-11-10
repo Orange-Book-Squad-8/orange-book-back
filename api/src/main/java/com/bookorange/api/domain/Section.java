@@ -43,4 +43,8 @@ public class Section {
         return lessons.stream().mapToInt(Lesson::getDurationInMinutes).sum();
     }
 
+    public Integer getTotalLessons() {
+        return lessons.size();
+    }
+
 }
