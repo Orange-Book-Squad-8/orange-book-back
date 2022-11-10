@@ -7,19 +7,24 @@ import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
 import com.bookorange.api.repository.AppUserRepository;
 import com.bookorange.api.service.AppUserService;
+import com.bookorange.api.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
 @Service
 public class AppUserServiceImp implements AppUserService {
 
+
     private final AppUserRepository appUserRepository;
+
 
     @Autowired
     public AppUserServiceImp(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
+
     }
 
     @Override
@@ -30,6 +35,7 @@ public class AppUserServiceImp implements AppUserService {
         user.setEmail(userCreateDTO.getEmail());
         user.setStackCategories(userCreateDTO.getStackCategories());
         user.setRole(role);
+
         return appUserRepository.save(user);
     }
 
@@ -46,7 +52,7 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser findById(Long userId) {
-        return appUserRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return appUserRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
     @Override
