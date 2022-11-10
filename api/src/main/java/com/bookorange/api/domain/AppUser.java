@@ -38,14 +38,14 @@ public class AppUser {
     @Email(message = "email not valid")
     private String email;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     @ElementCollection
     private List<StackCategories> stackCategories = new ArrayList<>();
 
     @ElementCollection
     private List<String> badges = new ArrayList<>();
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
 

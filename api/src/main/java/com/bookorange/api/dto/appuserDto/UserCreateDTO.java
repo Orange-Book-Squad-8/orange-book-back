@@ -22,7 +22,8 @@ public class UserCreateDTO {
     @Length(min = 3, max = 30)
     private String username;
 
-
+    @NotBlank(message = "field not found")
+    @Length(min = 6, message = "password must contain at least 6 characters")
     private String password;
 
     @Column(unique = true)
@@ -30,7 +31,7 @@ public class UserCreateDTO {
     @Email(message = "email not valid")
     private String email;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     private List<StackCategories> stackCategories;
 
     private String role;

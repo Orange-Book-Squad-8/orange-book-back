@@ -28,7 +28,7 @@ public class LessonCreateDTO {
     @NotBlank(message = "field not found")
     private String topic;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     private ContentType contentType;
 
     @Positive

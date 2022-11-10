@@ -32,10 +32,10 @@ public class Course {
     @NotBlank(message = "field not found")
     private String creator;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     private StackCategories category;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     private Difficulty difficulty;
 
     private Boolean visible = true;
