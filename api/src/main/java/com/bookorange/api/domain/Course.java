@@ -32,10 +32,10 @@ public class Course {
     @NotBlank(message = "field not found")
     private String creator;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     private StackCategories category;
 
-    @NotNull
+    @NotNull(message = "cannot be null")
     private Difficulty difficulty;
 
     private Boolean visible = true;
@@ -45,10 +45,6 @@ public class Course {
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();
-    }
-
-    public Integer getTotalLessons() {
-        return sections.stream().mapToInt(Section::getTotalLessons).sum();
     }
 
     public void addSection(Section section) {
