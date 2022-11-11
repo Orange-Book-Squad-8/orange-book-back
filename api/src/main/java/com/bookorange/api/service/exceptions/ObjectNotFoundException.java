@@ -1,4 +1,4 @@
-package com.bookorange.api.handler.exception;
+package com.bookorange.api.service.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 

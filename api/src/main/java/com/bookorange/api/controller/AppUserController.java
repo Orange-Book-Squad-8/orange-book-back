@@ -12,14 +12,11 @@ import com.bookorange.api.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -34,13 +31,9 @@ public class AppUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-        try {
             Role role = roleService.findByName(userCreateDTO.getRole());
             AppUser createdAppUser = appUserService.create(userCreateDTO, role);
             return ResponseEntity.ok(new AppUserDTO(createdAppUser));
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @PutMapping(value = "/edit")
@@ -93,7 +86,6 @@ public class AppUserController {
     @GetMapping("/{id}/courses")
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
-            System.out.println("oi");
             AppUser user = appUserService.findById(id);
             List<Long> watchedList = watchedListService.getWatchedLessonList(user);
             AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
@@ -180,18 +172,5 @@ public class AppUserController {
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
     }
 }
