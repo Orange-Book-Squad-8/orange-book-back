@@ -8,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +22,19 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "field not found")
+
     private String title;
 
-    @NotBlank(message = "field not found")
+
     private String description;
 
-    @NotBlank(message = "field not found")
+
     private String creator;
 
-    @NotNull(message = "cannot be null")
+
     private StackCategories category;
 
-    @NotNull(message = "cannot be null")
+
     private Difficulty difficulty;
 
     private Boolean visible = true;
