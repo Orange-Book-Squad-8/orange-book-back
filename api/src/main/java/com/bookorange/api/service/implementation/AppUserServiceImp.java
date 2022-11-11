@@ -46,7 +46,7 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser update(AppUserDTO appUserDTO) {
-        verifyFieldsUpdate(appUserDTO);
+        checkEmailUsernameMethodUpdate(appUserDTO);
 
         AppUser user = findById(appUserDTO.getId());
         user.setEmail(appUserDTO.getEmail());
@@ -149,14 +149,13 @@ public class AppUserServiceImp implements AppUserService {
         }
     }
 
-    private void verifyFieldsUpdate(AppUserDTO appUserDTO) {
+    private void checkEmailUsernameMethodUpdate(AppUserDTO appUserDTO) {
         //Verify Email
         Boolean verifyEmail = emailExists(appUserDTO.getEmail());
 
-        String newEmail = appUserDTO.getEmail();
-        AppUser oldEmail = findById(appUserDTO.getId());
+        AppUser old = findById(appUserDTO.getId());
 
-        if(!Objects.equals(newEmail, oldEmail.getEmail())){
+        if(!Objects.equals(appUserDTO.getEmail(), old.getEmail())){
             if(verifyEmail){
                 throw new ForbiddenException("Email has exist");
             }
@@ -166,10 +165,9 @@ public class AppUserServiceImp implements AppUserService {
 
         Boolean verifyUsername = usernameExists(appUserDTO.getUsername());
 
-        String newUsername = appUserDTO.getUsername();
-        AppUser oldUsername = findById(appUserDTO.getId());
+        AppUser older = findById(appUserDTO.getId());
 
-        if(!Objects.equals(newUsername, oldUsername.getUsername())){
+        if(!Objects.equals(appUserDTO.getUsername(), older.getUsername())){
             if(verifyUsername){
                 throw new ForbiddenException("Username has exist");
             }
