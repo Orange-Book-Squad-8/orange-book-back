@@ -34,5 +34,6 @@ public class UserCreateDTO {
     @NotNull(message = "cannot be null")
     private List<StackCategories> stackCategories;
 
+    @NotNull(message = "cannot be null")
     private String role;
 }

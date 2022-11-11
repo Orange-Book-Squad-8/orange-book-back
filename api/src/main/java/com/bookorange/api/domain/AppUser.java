@@ -3,6 +3,7 @@ package com.bookorange.api.domain;
 import com.bookorange.api.enumerator.StackCategories;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -18,6 +19,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AppUser {
 
     @Id
@@ -60,6 +62,7 @@ public class AppUser {
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Course> myCourses = new ArrayList<>();
+
 
     public void addSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");

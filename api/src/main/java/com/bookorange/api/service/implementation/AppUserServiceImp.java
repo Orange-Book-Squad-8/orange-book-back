@@ -5,6 +5,7 @@ import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.AppUserCourseEditDTO;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
+import com.bookorange.api.handler.exception.ForbiddenException;
 import com.bookorange.api.repository.AppUserRepository;
 import com.bookorange.api.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,31 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser create(UserCreateDTO userCreateDTO, Role role) {
+        verifyFields(userCreateDTO);
+
         AppUser user = new AppUser();
         user.setUsername(userCreateDTO.getUsername());
         user.setPassword(userCreateDTO.getPassword());
         user.setEmail(userCreateDTO.getEmail());
         user.setStackCategories(userCreateDTO.getStackCategories());
         user.setRole(role);
+
         return appUserRepository.save(user);
+    }
+
+    private void verifyFields(UserCreateDTO userCreateDTO) {
+        Boolean verifyEmail = emailExists(userCreateDTO.getEmail());
+
+
+        if(verifyEmail){
+            throw new ForbiddenException("Email has exist");
+        }
+
+        Boolean verifyUsername = usernameExists(userCreateDTO.getUsername());
+
+        if(verifyUsername){
+            throw new ForbiddenException("Username has exist");
+        }
     }
 
     @Override
@@ -112,5 +131,16 @@ public class AppUserServiceImp implements AppUserService {
         user.finishCourse(userDto.getCourse());
         appUserRepository.save(user);
     }
+
+    public Boolean emailExists(String email){
+        AppUser user = appUserRepository.findByEmail(email);
+        return user != null;
+    }
+
+    public Boolean usernameExists(String username){
+        AppUser user = appUserRepository.findByUsername(username);
+        return user != null;
+    }
+
 
 }
