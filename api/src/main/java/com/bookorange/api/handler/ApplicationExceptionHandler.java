@@ -2,6 +2,7 @@ package com.bookorange.api.handler;
 
 import com.bookorange.api.handler.exception.BadRequestException;
 import com.bookorange.api.handler.exception.ForbiddenException;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.handler.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,14 @@ public class ApplicationExceptionHandler {
                 .message(e.getMessage())
                 .status(403)
                 .build(), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler({ObjectNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handlerObjectNotFoundException(Exception e){
+        return new ResponseEntity<>(ErrorResponse.builder()
+                .message(e.getMessage())
+                .status(404)
+                .build(), HttpStatus.NOT_FOUND);
     }
 
 }
