@@ -9,11 +9,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -54,20 +53,6 @@ public class AppUser {
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Course> myCourses = new ArrayList<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AppUser appUser = (AppUser) o;
-        return id.equals(appUser.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
 
     public void addSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");

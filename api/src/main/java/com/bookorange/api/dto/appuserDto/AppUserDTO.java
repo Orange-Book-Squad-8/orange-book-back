@@ -16,8 +16,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Data
 public class AppUserDTO {
-    private Long id;
 
+    private Long id;
 
 
     @NotBlank(message = "field not found")
@@ -28,8 +28,6 @@ public class AppUserDTO {
     @NotBlank(message = "field not found")
     @Email(message = "email not valid")
     private String email;
-
-
 
 
     public AppUserDTO(AppUser user) {
