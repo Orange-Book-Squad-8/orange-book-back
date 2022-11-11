@@ -2,7 +2,9 @@ package com.bookorange.api.domain;
 
 import com.bookorange.api.enumerator.StackCategories;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
+
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -18,6 +20,7 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AppUser {
 
     @Id
@@ -61,7 +64,6 @@ public class AppUser {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Course> myCourses = new ArrayList<>();
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,6 +76,7 @@ public class AppUser {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 
     public void addSubscribedCourse(Course course) {
         if (course == null) throw new IllegalArgumentException("course cannot be null");

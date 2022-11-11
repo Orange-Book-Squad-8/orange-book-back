@@ -31,13 +31,9 @@ public class AppUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-        try {
             Role role = roleService.findByName(userCreateDTO.getRole());
             AppUser createdAppUser = appUserService.create(userCreateDTO, role);
             return ResponseEntity.ok(new AppUserDTO(createdAppUser));
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @PutMapping(value = "/edit")
@@ -90,7 +86,6 @@ public class AppUserController {
     @GetMapping("/{id}/courses")
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
-            System.out.println("oi");
             AppUser user = appUserService.findById(id);
             List<Long> watchedList = watchedListService.getWatchedLessonList(user);
             AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
@@ -178,5 +173,4 @@ public class AppUserController {
             throw new RuntimeException(e.getMessage());
         }
     }
-
 }
