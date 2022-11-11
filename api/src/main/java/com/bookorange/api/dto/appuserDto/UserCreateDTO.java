@@ -28,7 +28,7 @@ public class UserCreateDTO {
 
     @Column(unique = true)
     @NotBlank(message = "field not found")
-    @Email(message = "email not valid")
+    @Email(message = "email must be unique")
     private String email;
 
     @NotNull(message = "cannot be null")

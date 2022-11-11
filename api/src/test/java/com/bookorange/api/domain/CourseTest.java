@@ -145,6 +145,7 @@ class CourseTest {
                 StackCategories.UI,
                 Difficulty.ADVANCED,
                 false,
+                new ArrayList<>(),
                 new ArrayList<>()
         );
         assertEquals(5L, course.getId());
@@ -155,5 +156,6 @@ class CourseTest {
         assertEquals(Difficulty.ADVANCED, course.getDifficulty());
         assertFalse(course.getVisible());
         assertEquals(ArrayList.class, course.getSections().getClass());
+        assertEquals(ArrayList.class, course.getIdSections());
     }
 }

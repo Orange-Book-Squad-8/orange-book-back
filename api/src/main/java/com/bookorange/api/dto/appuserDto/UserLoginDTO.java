@@ -21,4 +21,5 @@ public class UserLoginDTO {
     @NotBlank(message = "field not found")
     @Length(min = 6, message = "password must contain at least 6 characters")
     private String password;
+
 }
