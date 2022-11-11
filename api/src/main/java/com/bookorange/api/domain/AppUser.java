@@ -5,12 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
 
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,28 +23,23 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
-    @NotBlank(message = "field not found")
-    @Length(min = 3, max = 30)
+
     private String username;
 
-    @NotBlank(message = "field not found")
-    @Length(min = 6, message = "password must contain at least 6 characters")
+
     private String password;
 
-    @Column(unique = true)
-    @NotBlank(message = "field not found")
-    @Email(message = "email not valid")
+
     private String email;
 
-    @NotNull(message = "cannot be null")
+
     @ElementCollection
     private List<StackCategories> stackCategories = new ArrayList<>();
 
     @ElementCollection
     private List<String> badges = new ArrayList<>();
 
-    @NotNull(message = "cannot be null")
+
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
 
