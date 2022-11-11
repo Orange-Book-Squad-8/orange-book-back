@@ -34,13 +34,9 @@ public class AppUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-        try {
             Role role = roleService.findByName(userCreateDTO.getRole());
             AppUser createdAppUser = appUserService.create(userCreateDTO, role);
             return ResponseEntity.ok(new AppUserDTO(createdAppUser));
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @PutMapping(value = "/edit")
@@ -93,7 +89,6 @@ public class AppUserController {
     @GetMapping("/{id}/courses")
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
-            System.out.println("oi");
             AppUser user = appUserService.findById(id);
             List<Long> watchedList = watchedListService.getWatchedLessonList(user);
             AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
@@ -182,16 +177,5 @@ public class AppUserController {
         }
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
+
 }
