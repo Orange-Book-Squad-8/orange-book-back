@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AppUserServiceImp implements AppUserService {
@@ -45,12 +46,12 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser update(AppUserDTO appUserDTO) {
+        verifyFieldsUpdate(appUserDTO);
+
         AppUser user = findById(appUserDTO.getId());
-        user.setRole(appUserDTO.getRole());
-        user.setBadges(appUserDTO.getBadges());
         user.setEmail(appUserDTO.getEmail());
         user.setUsername(appUserDTO.getUsername());
-        user.setStackCategories(appUserDTO.getStackCategories());
+
         return appUserRepository.save(user);
     }
 
@@ -148,5 +149,33 @@ public class AppUserServiceImp implements AppUserService {
         }
     }
 
+    private void verifyFieldsUpdate(AppUserDTO appUserDTO) {
+        //Verify Email
+        Boolean verifyEmail = emailExists(appUserDTO.getEmail());
+
+        String newEmail = appUserDTO.getEmail();
+        AppUser oldEmail = findById(appUserDTO.getId());
+
+        if(!Objects.equals(newEmail, oldEmail.getEmail())){
+            if(verifyEmail){
+                throw new ForbiddenException("Email has exist");
+            }
+        }
+
+        //Verify Username
+
+        Boolean verifyUsername = usernameExists(appUserDTO.getUsername());
+
+        String newUsername = appUserDTO.getUsername();
+        AppUser oldUsername = findById(appUserDTO.getId());
+
+        if(!Objects.equals(newUsername, oldUsername.getUsername())){
+            if(verifyUsername){
+                throw new ForbiddenException("Username has exist");
+            }
+        }
+
+
+    }
 
 }

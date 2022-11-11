@@ -38,12 +38,8 @@ public class AppUserController {
 
     @PutMapping(value = "/edit")
     public ResponseEntity<AppUserDTO> editAppUser(@Valid @RequestBody AppUserDTO appUserDTO) {
-        try {
             AppUser editedUser = appUserService.update(appUserDTO);
             return ResponseEntity.ok(new AppUserDTO(editedUser));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @PostMapping(value = "/login")
