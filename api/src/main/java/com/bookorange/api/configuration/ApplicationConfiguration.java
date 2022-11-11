@@ -68,6 +68,7 @@ public class ApplicationConfiguration {
         course1.setDifficulty(Difficulty.ADVANCED);
         course1.setVisible(true);
         course1.setSections(List.of(section1, section2));
+        course1.setIdSections(List.of(3L,4L));
 
         courseRepository.save(course1);
 
@@ -90,6 +91,8 @@ public class ApplicationConfiguration {
         course2.setDifficulty(Difficulty.BEGINNER);
         course2.setVisible(true);
         course2.setSections(List.of(section3, section4));
+        course2.setIdSections(List.of(6L,7L));
+
 
         courseRepository.save(course2);
 
@@ -112,6 +115,9 @@ public class ApplicationConfiguration {
         course3.setDifficulty(Difficulty.BEGINNER);
         course3.setVisible(false);
         course3.setSections(List.of(section5, section6));
+        course3.setIdSections(List.of(9L,10L));
+
+
 
         courseRepository.save(course3);
 

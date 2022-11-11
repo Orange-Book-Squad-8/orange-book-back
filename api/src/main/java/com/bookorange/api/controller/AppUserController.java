@@ -8,6 +8,8 @@ import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.*;
 import com.bookorange.api.dto.watchedDto.SetWatchedLessonDTO;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
+import com.bookorange.api.handler.exception.ForbiddenException;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -46,25 +48,38 @@ public class AppUserController {
     public ResponseEntity<AppUserDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
             AppUser user = appUserService.findByUsername(userLoginDTO.getUsername());
+            if(user == null){
+                throw new ForbiddenException("User incorrect");
+            }
+
             if (Objects.equals(user.getPassword(), userLoginDTO.getPassword())) {
                 return ResponseEntity.ok(new AppUserDTO(user));
             }
-            throw new RuntimeException("Password incorrect");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ForbiddenException("Password incorrect");
+        } catch (ForbiddenException e){
+            throw new ForbiddenException("User incorrect");
+        }
+        catch (Exception e){
+            throw new RuntimeException("Could not login");
         }
     }
 
     @PutMapping("/watched")
     public ResponseEntity<Void> setWatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
-        try {
+        try{
             Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
             AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
+
+            if(lesson == null || user == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             watchedListService.setWatched(new WatchedLessonDTO(user, lesson));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+            } catch (ObjectNotFoundException e) {
+                throw new ObjectNotFoundException("Id not found");
         }
+
     }
 
     @PutMapping("/unwatched")
@@ -84,7 +99,7 @@ public class AppUserController {
         try {
             AppUser user = appUserService.findById(id);
             List<Long> watchedList = watchedListService.getWatchedLessonList(user);
-            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
+            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user);
 
             return ResponseEntity.ok(userCourseDTO);
         } catch (RuntimeException e) {
@@ -169,4 +184,6 @@ public class AppUserController {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
 }

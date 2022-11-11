@@ -2,6 +2,7 @@ package com.bookorange.api.domain;
 
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,25 +23,25 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     private String title;
-
 
     private String description;
 
-
     private String creator;
 
-
     private StackCategories category;
-
 
     private Difficulty difficulty;
 
     private Boolean visible = true;
 
+    @JsonIgnore
     @OneToMany
     private List<Section> sections = new ArrayList<>();
+
+    @ElementCollection
+    private List<Long> idSections = new ArrayList<>();
+
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();

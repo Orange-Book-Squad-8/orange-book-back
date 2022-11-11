@@ -172,8 +172,6 @@ public class AppUserServiceImp implements AppUserService {
                 throw new ForbiddenException("Username has exist");
             }
         }
-
-
     }
 
 }
