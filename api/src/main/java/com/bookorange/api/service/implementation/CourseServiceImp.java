@@ -6,9 +6,9 @@ import com.bookorange.api.dto.courseDto.CourseDTO;
 import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.repository.CourseRepository;
 import com.bookorange.api.service.CourseService;
-import com.bookorange.api.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

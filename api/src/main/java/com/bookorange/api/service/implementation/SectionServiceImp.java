@@ -6,7 +6,7 @@ import com.bookorange.api.dto.sectionDto.SectionDTO;
 import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 import com.bookorange.api.repository.SectionRepository;
 import com.bookorange.api.service.SectionService;
-import com.bookorange.api.service.exceptions.ObjectNotFoundException;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
