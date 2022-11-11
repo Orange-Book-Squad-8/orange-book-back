@@ -6,13 +6,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
+
 import com.bookorange.api.domain.AppUser;
-import com.bookorange.api.domain.Lesson;
+
 import com.bookorange.api.domain.Role;
-import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.repository.AppUserRepository;
-import com.bookorange.api.repository.LessonRepository;
+
 import com.bookorange.api.repository.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,12 +38,6 @@ public class AppUserControllerTest {
 
     @MockBean
     private RoleRepository roleRepository;
-
-    @MockBean
-    private LessonRepository lessonRepository;
-
-
-
 
     private static final Long ID = 1L;
 
@@ -109,18 +103,6 @@ public class AppUserControllerTest {
                 .username("string12")
                 .build());
 
-    }
-
-    public Optional<Lesson> returnOptionalLesson(){
-        return Optional.ofNullable(Lesson.builder()
-                        .author("Fulano")
-                        .contentType(ContentType.ARTICLE)
-                        .description("Artigo bla bla bla")
-                        .durationInMinutes(10)
-                        .link("https://www.devmedia.com.br/conhecendo-a-interface-map-do-java/37463")
-                        .title("Spring Boot Test")
-                        .topic("Integration test")
-                .build());
     }
 
 
@@ -314,22 +296,5 @@ public class AppUserControllerTest {
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(403));
     }
-
-    @Test
-    public void setWatchedWithUserIdAndLessonIdValid_RETURNSIS2XX() throws Exception {
-
-        Mockito.when(lessonRepository.findById(1L)).thenReturn(returnOptionalLesson());
-        Mockito.when(repository.findById(1L)).thenReturn(returnOptionalAppUser());
-
-
-        this.mockMvc.perform(
-                        put("/watched")
-                                .content(LOGIN_INVALID_USERNAME)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is2xxSuccessful());
-    }
-
-
 
 }

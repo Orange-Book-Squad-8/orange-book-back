@@ -22,11 +22,12 @@ public class AppUserCourseDTO {
 
     private List<CourseDTO> myCourses = new ArrayList<>();
 
-    Map<Long, List<Long>> mapWatchedLesson = new HashMap<>();
+    private List<Long> watchedLesson;
 
-    public AppUserCourseDTO(AppUser user) {
+    public AppUserCourseDTO(AppUser user, List<Long> watchedLesson) {
         this.subscribedCourses = user.getSubscribedCourses().stream().map(CourseDTO::new).toList();
         this.archivedCourses = user.getArchivedCourses().stream().map(CourseDTO::new).toList();
         this.myCourses = user.getMyCourses().stream().map(CourseDTO::new).toList();
+        this.watchedLesson = watchedLesson;
     }
 }

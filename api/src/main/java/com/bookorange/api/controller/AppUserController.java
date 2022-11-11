@@ -33,22 +33,22 @@ public class AppUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-            Role role = roleService.findByName(userCreateDTO.getRole());
-            AppUser createdAppUser = appUserService.create(userCreateDTO, role);
-            return ResponseEntity.ok(new AppUserDTO(createdAppUser));
+        Role role = roleService.findByName(userCreateDTO.getRole());
+        AppUser createdAppUser = appUserService.create(userCreateDTO, role);
+        return ResponseEntity.ok(new AppUserDTO(createdAppUser));
     }
 
     @PutMapping(value = "/edit")
     public ResponseEntity<AppUserDTO> editAppUser(@Valid @RequestBody AppUserDTO appUserDTO) {
-            AppUser editedUser = appUserService.update(appUserDTO);
-            return ResponseEntity.ok(new AppUserDTO(editedUser));
+        AppUser editedUser = appUserService.update(appUserDTO);
+        return ResponseEntity.ok(new AppUserDTO(editedUser));
     }
 
     @PostMapping(value = "/login")
     public ResponseEntity<AppUserDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
             AppUser user = appUserService.findByUsername(userLoginDTO.getUsername());
-            if(user == null){
+            if (user == null) {
                 throw new ForbiddenException("User incorrect");
             }
 
@@ -56,30 +56,26 @@ public class AppUserController {
                 return ResponseEntity.ok(new AppUserDTO(user));
             }
             throw new ForbiddenException("Password incorrect");
-        } catch (ForbiddenException e){
+        } catch (ForbiddenException e) {
             throw new ForbiddenException("User incorrect");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("Could not login");
         }
     }
 
     @PutMapping("/watched")
     public ResponseEntity<Void> setWatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
-        try{
-            Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
-            AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
-
-            if(lesson == null || user == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
-            watchedListService.setWatched(new WatchedLessonDTO(user, lesson));
-            return new ResponseEntity<>(HttpStatus.OK);
-            } catch (ObjectNotFoundException e) {
-                throw new ObjectNotFoundException("Id not found");
-        }
-
+       try{
+           Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
+           AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
+           if (lesson == null || user == null) {
+               throw new ObjectNotFoundException("Id not found");
+           }
+           watchedListService.setWatched(new WatchedLessonDTO(user, lesson));
+           return new ResponseEntity<>(HttpStatus.OK);
+       }catch(ObjectNotFoundException e){
+           throw new ObjectNotFoundException("Id not found");
+       }
     }
 
     @PutMapping("/unwatched")
@@ -87,10 +83,13 @@ public class AppUserController {
         try {
             Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
             AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
+            if (lesson == null || user == null) {
+                throw new ObjectNotFoundException("Id not found");
+            }
             watchedListService.setUnwatched(new WatchedLessonDTO(user, lesson));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -98,24 +97,31 @@ public class AppUserController {
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
             AppUser user = appUserService.findById(id);
-            List<Long> watchedList = watchedListService.getWatchedLessonList(user);
-            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user);
+            if (user == null) {
+                throw new ObjectNotFoundException("Id not found");
+            }
 
+            List<Long> watchedList = watchedListService.getWatchedLessonList(user);
+            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
             return ResponseEntity.ok(userCourseDTO);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
-
 
     @PostMapping(value = "/addSubscribedCourses")
     public ResponseEntity<Void> addSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.addSubscribedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -123,10 +129,15 @@ public class AppUserController {
     public ResponseEntity<Void> removeSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.removeSubscribedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -134,10 +145,15 @@ public class AppUserController {
     public ResponseEntity<Void> addArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.addArchivedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -145,10 +161,15 @@ public class AppUserController {
     public ResponseEntity<Void> removeArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.removeArchivedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -156,10 +177,15 @@ public class AppUserController {
     public ResponseEntity<Void> addMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.addMyCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -167,10 +193,15 @@ public class AppUserController {
     public ResponseEntity<Void> removeMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.removeMyCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
@@ -178,10 +209,15 @@ public class AppUserController {
     public ResponseEntity<Void> finishCourse(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
+
+            if(course == null || userDTO.getUserId() == null){
+                throw new ObjectNotFoundException("Id not found");
+            }
+
             appUserService.finishCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException("Id not found");
         }
     }
 
