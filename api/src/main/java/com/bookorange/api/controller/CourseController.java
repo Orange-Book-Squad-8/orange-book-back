@@ -35,7 +35,7 @@ public class CourseController {
                     .fromCurrentRequest().path("/create").buildAndExpand(courseCreated.getId()).toUri();
             return ResponseEntity.created(uri).build();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ public class CourseController {
             Course course = courseService.findById(courseId);
             return ResponseEntity.ok(course);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class CourseController {
             List<CourseDTO> collect = allCourses.stream().map(CourseDTO::new).toList();
             return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class CourseController {
             List<CourseDTO> collect = coursesByCategory.stream().map(CourseDTO::new).toList();
             return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class CourseController {
             List<CourseDTO> collect = coursesByDifficulty.stream().map(CourseDTO::new).toList();
             return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ public class CourseController {
             List<CourseDTO> collect = coursesByCreator.stream().map(CourseDTO::new).toList();
             return ResponseEntity.ok(collect);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class CourseController {
             courseDTO.getDeletedSectionIds().forEach(sectionService::delete);
             return ResponseEntity.ok(courseUpdate);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -110,7 +110,7 @@ public class CourseController {
             courseService.delete(courseId);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -121,7 +121,7 @@ public class CourseController {
             courseService.addSection(new CourseSectionEditDTO(courseSectionEditDTO.getCourseId(), section));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -133,7 +133,7 @@ public class CourseController {
             sectionService.delete(courseSectionEditDTO.getSectionId());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
