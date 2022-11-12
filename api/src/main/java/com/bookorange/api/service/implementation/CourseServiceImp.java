@@ -48,7 +48,10 @@ public class CourseServiceImp implements CourseService {
 
     @Override
     public List<Course> findByCategory(StackCategories category) {
-        return courseRepository.findByCategory(category);
+
+        List<Course> list = courseRepository.findByCategory(category);
+        if (list.isEmpty()) throw new ObjectNotFoundException("No courses found for category " + category);
+        return list;
     }
 
     @Override

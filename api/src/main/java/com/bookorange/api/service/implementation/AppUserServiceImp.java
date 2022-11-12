@@ -5,16 +5,13 @@ import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.AppUserCourseEditDTO;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
-import com.bookorange.api.handler.exception.ForbiddenException;
 import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.repository.AppUserRepository;
 import com.bookorange.api.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class AppUserServiceImp implements AppUserService {
@@ -31,8 +28,6 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser create(UserCreateDTO userCreateDTO, Role role) {
-        verifyFields(userCreateDTO);
-
         AppUser user = new AppUser();
         user.setUsername(userCreateDTO.getUsername());
         user.setPassword(userCreateDTO.getPassword());
@@ -46,8 +41,6 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser update(AppUserDTO appUserDTO) {
-        checkEmailUsernameMethodUpdate(appUserDTO);
-
         AppUser user = findById(appUserDTO.getId());
         user.setEmail(appUserDTO.getEmail());
         user.setUsername(appUserDTO.getUsername());
@@ -62,7 +55,7 @@ public class AppUserServiceImp implements AppUserService {
 
     @Override
     public AppUser findByUsername(String username) {
-        return appUserRepository.findByUsername(username);
+        return appUserRepository.findByUsername(username).orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
     @Override
@@ -124,54 +117,5 @@ public class AppUserServiceImp implements AppUserService {
         appUserRepository.save(user);
     }
 
-    public Boolean emailExists(String email){
-        AppUser user = appUserRepository.findByEmail(email);
-        return user != null;
-    }
-
-    public Boolean usernameExists(String username){
-        AppUser user = appUserRepository.findByUsername(username);
-        return user != null;
-    }
-
-    private void verifyFields(UserCreateDTO userCreateDTO) {
-        Boolean verifyEmail = emailExists(userCreateDTO.getEmail());
-
-
-        if(verifyEmail){
-            throw new ForbiddenException("Email has exist");
-        }
-
-        Boolean verifyUsername = usernameExists(userCreateDTO.getUsername());
-
-        if(verifyUsername){
-            throw new ForbiddenException("Username has exist");
-        }
-    }
-
-    private void checkEmailUsernameMethodUpdate(AppUserDTO appUserDTO) {
-        //Verify Email
-        Boolean verifyEmail = emailExists(appUserDTO.getEmail());
-
-        AppUser old = findById(appUserDTO.getId());
-
-        if(!Objects.equals(appUserDTO.getEmail(), old.getEmail())){
-            if(verifyEmail){
-                throw new ForbiddenException("Email has exist");
-            }
-        }
-
-        //Verify Username
-
-        Boolean verifyUsername = usernameExists(appUserDTO.getUsername());
-
-        AppUser older = findById(appUserDTO.getId());
-
-        if(!Objects.equals(appUserDTO.getUsername(), older.getUsername())){
-            if(verifyUsername){
-                throw new ForbiddenException("Username has exist");
-            }
-        }
-    }
 
 }

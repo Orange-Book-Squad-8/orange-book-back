@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -50,9 +49,6 @@ public class AppUserController {
     public ResponseEntity<AppUserDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
             AppUser user = appUserService.findByUsername(userLoginDTO.getUsername());
-            if (user == null) {
-                throw new ForbiddenException("User incorrect");
-            }
 
             if (Objects.equals(user.getPassword(), userLoginDTO.getPassword())) {
                 return ResponseEntity.ok(new AppUserDTO(user));
@@ -67,17 +63,15 @@ public class AppUserController {
 
     @PutMapping("/watched")
     public ResponseEntity<Void> setWatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
-       try{
-           Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
-           AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
-           if (lesson == null || user == null) {
-               throw new ObjectNotFoundException("Id not found");
-           }
-           watchedListService.setWatched(new WatchedLessonDTO(user, lesson));
-           return new ResponseEntity<>(HttpStatus.OK);
-       }catch(ObjectNotFoundException e){
-           throw new ObjectNotFoundException("Id not found");
-       }
+        try {
+            Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
+            AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
+
+            watchedListService.setWatched(new WatchedLessonDTO(user, lesson));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException(e.getMessage());
+        }
     }
 
     @PutMapping("/unwatched")
@@ -85,13 +79,11 @@ public class AppUserController {
         try {
             Lesson lesson = lessonService.findById(setWatchedLessonDTO.getLessonId());
             AppUser user = appUserService.findById(setWatchedLessonDTO.getUserId());
-            if (lesson == null || user == null) {
-                throw new ObjectNotFoundException("Id not found");
-            }
+
             watchedListService.setUnwatched(new WatchedLessonDTO(user, lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -117,8 +109,8 @@ public class AppUserController {
             AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedLesson);
 
             return ResponseEntity.ok(userCourseDTO);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -127,15 +119,10 @@ public class AppUserController {
     public ResponseEntity<Void> addSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
-
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.addSubscribedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -143,15 +130,10 @@ public class AppUserController {
     public ResponseEntity<Void> removeSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
-
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.removeSubscribedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -159,15 +141,10 @@ public class AppUserController {
     public ResponseEntity<Void> addArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
-
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.addArchivedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -175,15 +152,10 @@ public class AppUserController {
     public ResponseEntity<Void> removeArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
-
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.removeArchivedCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -191,15 +163,10 @@ public class AppUserController {
     public ResponseEntity<Void> addMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
-
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.addMyCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -207,15 +174,10 @@ public class AppUserController {
     public ResponseEntity<Void> removeMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
-
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.removeMyCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
@@ -224,14 +186,10 @@ public class AppUserController {
         try {
             Course course = courseService.findById(userDTO.getCourseId());
 
-            if(course == null || userDTO.getUserId() == null){
-                throw new ObjectNotFoundException("Id not found");
-            }
-
             appUserService.finishCourse(new AppUserCourseEditDTO(userDTO.getUserId(), course));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
-            throw new ObjectNotFoundException("Id not found");
+            throw new ObjectNotFoundException(e.getMessage());
         }
     }
 
