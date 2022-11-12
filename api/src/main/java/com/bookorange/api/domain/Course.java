@@ -38,9 +38,6 @@ public class Course {
     @OneToMany
     private List<Section> sections = new ArrayList<>();
 
-    @ElementCollection
-    private List<Long> idSections = new ArrayList<>();
-
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();

@@ -2,7 +2,7 @@ package com.bookorange.api.service.implementation;
 
 import com.bookorange.api.domain.Course;
 import com.bookorange.api.dto.courseDto.CourseCreateDTO;
-import com.bookorange.api.dto.courseDto.CourseDTO;
+import com.bookorange.api.dto.courseDto.CourseEditDTO;
 import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
@@ -65,7 +65,7 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public Course update(CourseDTO courseDTO) {
+    public Course update(CourseEditDTO courseDTO) {
         Course course = findById(courseDTO.getId());
         course.setTitle(courseDTO.getTitle());
         course.setDescription(courseDTO.getDescription());

@@ -96,7 +96,7 @@ public class CourseController {
     @PutMapping(value = "/update")
     public ResponseEntity<Course> updateCourse(@Valid @RequestBody CourseEditDTO courseDTO) {
         try {
-            Course courseUpdate = courseService.update(new CourseDTO(courseDTO));
+            Course courseUpdate = courseService.update(courseDTO);
             courseDTO.getDeletedSectionIds().forEach(sectionService::delete);
             return ResponseEntity.ok(courseUpdate);
         } catch (RuntimeException e) {
