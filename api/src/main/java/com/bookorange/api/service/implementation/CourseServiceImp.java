@@ -43,25 +43,30 @@ public class CourseServiceImp implements CourseService {
 
     @Override
     public List<Course> findAll() {
-        return courseRepository.findAll();
+        List<Course> list = courseRepository.findAll();
+        if (list.isEmpty()) throw new ObjectNotFoundException("List empty");
+        return list;
     }
 
     @Override
     public List<Course> findByCategory(StackCategories category) {
-
         List<Course> list = courseRepository.findByCategory(category);
-        if (list.isEmpty()) throw new ObjectNotFoundException("No courses found for category " + category);
+        if (list.isEmpty()) throw new ObjectNotFoundException("No courses found for category: " + category);
         return list;
     }
 
     @Override
     public List<Course> findByDifficulty(Difficulty difficulty) {
-        return courseRepository.findByDifficulty(difficulty);
+        List<Course> list = courseRepository.findByDifficulty(difficulty);
+        if (list.isEmpty()) throw new ObjectNotFoundException("No courses found for difficulty: " + difficulty);
+        return list;
     }
 
     @Override
     public List<Course> findByCreator(String creator) {
-        return courseRepository.findByCreator(creator);
+        List<Course> list = courseRepository.findByCreator(creator);
+        if (list.isEmpty()) throw new ObjectNotFoundException("No courses found for creator: " + creator);
+        return list;
     }
 
     @Override

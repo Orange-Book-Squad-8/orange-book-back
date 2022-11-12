@@ -30,7 +30,7 @@ public class LessonController {
                     .fromCurrentRequest().path("/create").buildAndExpand(lessonCreated.getId()).toUri();
             return ResponseEntity.created(uri).build();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class LessonController {
             Lesson lesson = lessonService.findById(lessonId);
             return ResponseEntity.ok(lesson);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class LessonController {
             List<Lesson> allLessons = lessonService.findAll();
             return ResponseEntity.ok(allLessons);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class LessonController {
             List<Lesson> lessonsByTopic = lessonService.findByTopic(topic);
             return ResponseEntity.ok(lessonsByTopic);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -70,7 +70,7 @@ public class LessonController {
             List<Lesson> lessonsByContentType = lessonService.findByContentType(content);
             return ResponseEntity.ok(lessonsByContentType);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ public class LessonController {
             Lesson lessonUpdate = lessonService.update(lessonDTO);
             return ResponseEntity.ok(lessonUpdate);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class LessonController {
             lessonService.delete(lessonId);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

@@ -30,7 +30,7 @@ public class SectionController {
             Section sectionUpdate = sectionService.update(sectionDTO);
             return ResponseEntity.ok(sectionUpdate);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ public class SectionController {
             sectionService.addLesson(new SectionEditLessonDTO(sectionEditLessonDTO.getSectionId(), lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ public class SectionController {
             sectionService.removeLesson(new SectionEditLessonDTO(sectionEditLessonDTO.getSectionId(), lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
