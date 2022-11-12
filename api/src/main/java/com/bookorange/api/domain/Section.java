@@ -19,7 +19,6 @@ public class Section {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     private String name;
 
     @ManyToMany
@@ -28,13 +27,13 @@ public class Section {
     public void addLesson(Lesson lesson) {
         if (lesson == null) throw new IllegalArgumentException("lesson cannot be null");
         if (lessons.contains(lesson)) throw new IllegalArgumentException("lesson already exists");
-        getLessons().add(lesson);
+        lessons.add(lesson);
     }
 
     public void removeLesson(Lesson lesson) {
         if (lesson == null) throw new IllegalArgumentException("lesson cannot be null");
         if (!lessons.contains(lesson)) throw new IllegalArgumentException("lesson does not exist");
-        getLessons().remove(lesson);
+        lessons.remove(lesson);
     }
 
     public Integer getDuration() {
@@ -45,4 +44,7 @@ public class Section {
         return lessons.size();
     }
 
+    public List<Long> getLessons() {
+        return lessons.stream().map(Lesson::getId).toList();
+    }
 }

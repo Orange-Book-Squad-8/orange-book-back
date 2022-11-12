@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +21,13 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     private String title;
-
 
     private String description;
 
-
     private String creator;
 
-
     private StackCategories category;
-
 
     private Difficulty difficulty;
 
@@ -58,6 +52,12 @@ public class Course {
         if (section == null) throw new IllegalArgumentException("section cannot be null");
         if (!sections.contains(section)) throw new IllegalArgumentException("section does not exist");
         sections.remove(section);
+    }
+
+    public List<Long> getLessons() {
+        List<Long> result = new ArrayList<>();
+        sections.forEach(section -> result.addAll(section.getLessons()));
+        return result;
     }
 
 }

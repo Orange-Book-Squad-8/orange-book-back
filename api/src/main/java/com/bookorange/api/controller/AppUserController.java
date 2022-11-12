@@ -14,9 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -31,15 +32,15 @@ public class AppUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-            Role role = roleService.findByName(userCreateDTO.getRole());
-            AppUser createdAppUser = appUserService.create(userCreateDTO, role);
-            return ResponseEntity.ok(new AppUserDTO(createdAppUser));
+        Role role = roleService.findByName(userCreateDTO.getRole());
+        AppUser createdAppUser = appUserService.create(userCreateDTO, role);
+        return ResponseEntity.ok(new AppUserDTO(createdAppUser));
     }
 
     @PutMapping(value = "/edit")
     public ResponseEntity<AppUserDTO> editAppUser(@Valid @RequestBody AppUserDTO appUserDTO) {
-            AppUser editedUser = appUserService.update(appUserDTO);
-            return ResponseEntity.ok(new AppUserDTO(editedUser));
+        AppUser editedUser = appUserService.update(appUserDTO);
+        return ResponseEntity.ok(new AppUserDTO(editedUser));
     }
 
     @PostMapping(value = "/login")
@@ -84,7 +85,21 @@ public class AppUserController {
         try {
             AppUser user = appUserService.findById(id);
             List<Long> watchedList = watchedListService.getWatchedLessonList(user);
-            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedList);
+
+            List<Course> courseList = user.getSubscribedCourses();
+            courseList.addAll(user.getArchivedCourses());
+            courseList.addAll(user.getMyCourses());
+
+            Map<Long, List<Long>> watchedLesson = new HashMap<>();
+            List<List<Long>> coursesLessons = courseList.stream().map(Course::getLessons).toList();
+
+            List<List<Long>> filteredList = coursesLessons.stream().map((lessons) -> lessons.stream().filter(watchedList::contains).toList()).toList();
+
+            for (int i = 0; i < courseList.size(); i++) {
+                watchedLesson.put(courseList.get(i).getId(), filteredList.get(i));
+            }
+
+            AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedLesson);
 
             return ResponseEntity.ok(userCourseDTO);
         } catch (RuntimeException e) {

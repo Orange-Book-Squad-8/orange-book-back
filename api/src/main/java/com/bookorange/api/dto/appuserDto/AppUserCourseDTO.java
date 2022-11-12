@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,9 +21,9 @@ public class AppUserCourseDTO {
 
     private List<CourseDTO> myCourses = new ArrayList<>();
 
-    private List<Long> watchedLesson;
+    private Map<Long, List<Long>> watchedLesson;
 
-    public AppUserCourseDTO(AppUser user, List<Long> watchedLesson) {
+    public AppUserCourseDTO(AppUser user, Map<Long, List<Long>> watchedLesson) {
         this.subscribedCourses = user.getSubscribedCourses().stream().map(CourseDTO::new).toList();
         this.archivedCourses = user.getArchivedCourses().stream().map(CourseDTO::new).toList();
         this.myCourses = user.getMyCourses().stream().map(CourseDTO::new).toList();
