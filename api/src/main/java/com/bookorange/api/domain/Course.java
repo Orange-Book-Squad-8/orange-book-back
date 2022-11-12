@@ -2,6 +2,7 @@ package com.bookorange.api.domain;
 
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,8 +34,13 @@ public class Course {
 
     private Boolean visible = true;
 
+    @JsonIgnore
     @OneToMany
     private List<Section> sections = new ArrayList<>();
+
+    @ElementCollection
+    private List<Long> idSections = new ArrayList<>();
+
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();

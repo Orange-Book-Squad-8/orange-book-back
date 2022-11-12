@@ -1,6 +1,7 @@
 package com.bookorange.api.dto.courseDto;
 
 import com.bookorange.api.domain.Course;
+import com.bookorange.api.domain.Section;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,6 +38,10 @@ public class CourseDTO {
     private Integer totalLessons;
 
 
+    private List<Section> sections;
+
+    private List<Long> idSections;
+
     public CourseDTO(Course course) {
         id = course.getId();
         title = course.getTitle();
@@ -44,6 +50,8 @@ public class CourseDTO {
         category = course.getCategory();
         difficulty = course.getDifficulty();
         visible = course.getVisible();
+        sections = course.getSections();
+        idSections = course.getIdSections();
     }
 
     public CourseDTO(CourseEditDTO course) {
