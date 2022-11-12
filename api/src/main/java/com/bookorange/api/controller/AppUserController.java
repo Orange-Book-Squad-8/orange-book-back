@@ -61,6 +61,17 @@ public class AppUserController {
         }
     }
 
+    @GetMapping(value = "/{id}/find")
+    public ResponseEntity<CompleteAppUserDTO> findById(@PathVariable Long id) {
+        try {
+            AppUser user = appUserService.findById(id);
+
+            return ResponseEntity.ok(new CompleteAppUserDTO(user));
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException(e.getMessage());
+        }
+    }
+
     @PutMapping("/watched")
     public ResponseEntity<Void> setWatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
         try {
