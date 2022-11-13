@@ -33,6 +33,7 @@ public class CourseServiceImp implements CourseService {
         course.setCategory(courseCreateDTO.getCategory());
         course.setDifficulty(courseCreateDTO.getDifficulty());
         course.setVisible(courseCreateDTO.getVisible());
+        course.setSections(courseCreateDTO.getSections());
         return courseRepository.save(course);
     }
 
@@ -77,6 +78,7 @@ public class CourseServiceImp implements CourseService {
         course.setCreator(courseDTO.getCreator());
         course.setCategory(courseDTO.getCategory());
         course.setDifficulty(courseDTO.getDifficulty());
+        course.setSections(courseDTO.getSections());
         course.setVisible(courseDTO.getVisible());
         return courseRepository.save(course);
     }

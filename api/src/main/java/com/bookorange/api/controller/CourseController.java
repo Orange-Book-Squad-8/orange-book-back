@@ -2,10 +2,12 @@ package com.bookorange.api.controller;
 
 
 import com.bookorange.api.domain.Course;
+import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.domain.Section;
 import com.bookorange.api.dto.courseDto.*;
 import com.bookorange.api.dto.sectionDto.CompleteSectionDTO;
 import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
+import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.service.CourseService;
@@ -34,6 +36,17 @@ public class CourseController {
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createCourse(@Valid @RequestBody CourseCreateDTO courseCreateDTO) {
         try {
+            List<Section> sections = courseCreateDTO.getSections()
+                    .stream()
+                    .map(section -> {
+                        Section created = sectionService.create(new SectionCreateDTO(section.getName()));
+                        section.getLessons().forEach(lessonId -> {
+                            Lesson lesson = lessonService.findById(lessonId);
+                            sectionService.addLesson(new SectionEditLessonDTO(created.getId(), lesson));
+                        });
+                        return created;
+                    }).toList();
+            courseCreateDTO.setSections(sections);
             Course courseCreated = courseService.create(courseCreateDTO);
             URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest().path("/create").buildAndExpand(courseCreated.getId()).toUri();
@@ -48,7 +61,7 @@ public class CourseController {
         try {
             Course course = courseService.findById(courseId);
             CompleteCourseDTO dto = new CompleteCourseDTO();
-            dto.setCourseDto(new CourseDTO(course));
+            dto.setCourseDTO(new CourseDTO(course));
             course.getSections().forEach(section -> {
                 CompleteSectionDTO sectionDTO = new CompleteSectionDTO();
                 sectionDTO.setId(section.getId());

@@ -33,7 +33,7 @@ public class Course {
 
     private Boolean visible = true;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Section> sections = new ArrayList<>();
 
 
@@ -61,4 +61,17 @@ public class Course {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", creator='" + creator + '\'' +
+                ", category=" + category +
+                ", difficulty=" + difficulty +
+                ", visible=" + visible +
+                ", sections=" + sections +
+                '}';
+    }
 }

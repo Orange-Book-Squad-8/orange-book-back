@@ -36,12 +36,9 @@ public class CourseEditDTO {
 
     private Boolean visible;
 
-    private Integer totalLessons;
-
     private List<Section> sections = new ArrayList<>();
 
     private List<Long> deletedSectionIds = new ArrayList<>();
-
 
     public CourseEditDTO(Course course) {
         id = course.getId();

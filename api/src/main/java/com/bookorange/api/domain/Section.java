@@ -47,4 +47,13 @@ public class Section {
     public List<Long> getLessons() {
         return lessons.stream().map(Lesson::getId).toList();
     }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lessons=" + lessons +
+                '}';
+    }
 }

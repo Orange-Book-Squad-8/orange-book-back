@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class CompleteCourseDTO {
-    private CourseDTO courseDto;
+    private CourseDTO courseDTO;
     private List<CompleteSectionDTO> completeSectionDTO = new ArrayList<>();
 
     public void addSection(CompleteSectionDTO dto) {

@@ -1,5 +1,6 @@
 package com.bookorange.api.dto.courseDto;
 
+import com.bookorange.api.domain.Section;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +33,6 @@ public class CourseCreateDTO {
     private Difficulty difficulty;
 
     private Boolean visible;
+
+    private List<Section> sections = new ArrayList<>();
 }
