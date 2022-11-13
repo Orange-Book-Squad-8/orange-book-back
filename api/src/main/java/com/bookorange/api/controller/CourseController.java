@@ -4,10 +4,12 @@ package com.bookorange.api.controller;
 import com.bookorange.api.domain.Course;
 import com.bookorange.api.domain.Section;
 import com.bookorange.api.dto.courseDto.*;
+import com.bookorange.api.dto.sectionDto.CompleteSectionDTO;
 import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.service.CourseService;
+import com.bookorange.api.service.LessonService;
 import com.bookorange.api.service.SectionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,7 @@ import java.util.List;
 public class CourseController {
     private final CourseService courseService;
     private final SectionService sectionService;
+    private final LessonService lessonService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createCourse(@Valid @RequestBody CourseCreateDTO courseCreateDTO) {
@@ -40,11 +43,20 @@ public class CourseController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<Course> findById(@RequestParam("courseId") Long courseId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<CompleteCourseDTO> findById(@PathVariable("id") Long courseId) {
         try {
             Course course = courseService.findById(courseId);
-            return ResponseEntity.ok(course);
+            CompleteCourseDTO dto = new CompleteCourseDTO();
+            dto.setCourseDto(new CourseDTO(course));
+            course.getSections().forEach(section -> {
+                CompleteSectionDTO sectionDTO = new CompleteSectionDTO();
+                sectionDTO.setId(section.getId());
+                sectionDTO.setName(section.getName());
+                sectionDTO.setLessons(section.getLessons().stream().map(lessonService::findById).toList());
+                dto.addSection(sectionDTO);
+            });
+            return ResponseEntity.ok(dto);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
