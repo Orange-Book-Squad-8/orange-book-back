@@ -15,6 +15,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/roles")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @AllArgsConstructor
 public class RoleController {
 

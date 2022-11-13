@@ -17,6 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/sections")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @AllArgsConstructor
 public class SectionController {
 
