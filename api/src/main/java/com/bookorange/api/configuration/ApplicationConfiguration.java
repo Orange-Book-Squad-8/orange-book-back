@@ -550,7 +550,7 @@ public class ApplicationConfiguration {
 
         Section section14 = new Section();
         section14.setName("Global");
-        section14.setLessons(List.of(lesson3, lesson4, lesson5, lesson6, lesson7));
+        section14.setLessons(List.of(lesson13, lesson14, lesson15, lesson16, lesson17));
 
         Section section15 = new Section();
         section15.setName("Livros");
@@ -570,6 +570,108 @@ public class ApplicationConfiguration {
         course6.setSections(List.of(section14, section15));
 
         courseRepository.save(course6);
+
+        Section section16 = new Section();
+        section16.setName("JVM");
+        section16.setLessons(List.of(lesson3, lesson4, lesson5, lesson6, lesson7, lesson8, lesson9));
+
+        Section section17 = new Section();
+        section17.setName("POO");
+        section17.setLessons(List.of(lesson23, lesson24, lesson25, lesson26, lesson22, lesson21));
+
+        Section section18 = new Section();
+        section17.setName("Conceitos Adicionais");
+        section17.setLessons(List.of(lesson10, lesson11, lesson12, lesson13));
+
+        sectionRepository.save(section16);
+        sectionRepository.save(section17);
+        sectionRepository.save(section18);
+
+
+        Course course7 = new Course();
+        course7.setTitle("Java avançado");
+        course7.setDescription("Trilha direcionada a quem já está encaminhado na tecnologia mas ainda quer dara aquela turbinada final.Boa Viagem!");
+        course7.setCreator("Orange Juice");
+        course7.setCategory(StackCategories.BACK_END);
+        course7.setDifficulty(Difficulty.ADVANCED);
+        course7.setVisible(true);
+        course7.setSections(List.of(section16, section17, section18));
+
+        courseRepository.save(course7);
+
+        Section section19 = new Section();
+        section19.setName("Inicio");
+        section19.setLessons(List.of(lesson23, lesson24, lesson25, lesson26, lesson21, lesson20));
+
+        Section section20 = new Section();
+        section20.setName("Aprofundando");
+        section20.setLessons(List.of(lesson3, lesson4, lesson5, lesson6, lesson7, lesson8, lesson9));
+
+        Section section21 = new Section();
+        section21.setName("Novos Horizoontes");
+        section21.setLessons(List.of(lesson18, lesson17, lesson16, lesson15, lesson14));
+
+        sectionRepository.save(section19);
+        sectionRepository.save(section20);
+        sectionRepository.save(section21);
+
+
+        Course course8 = new Course();
+        course8.setTitle("Seja um usuário para também ter sua Experience");
+        course8.setDescription("Aqui você vai ver por outro ângulo o que seria de fato a experiência que você vai passar através da sua aplicação de forma bem completa.Boa Viagem!");
+        course8.setCreator("Orange Juice");
+        course8.setCategory(StackCategories.UX);
+        course8.setDifficulty(Difficulty.INTERMEDIATE);
+        course8.setVisible(true);
+        course8.setSections(List.of(section19, section20, section21));
+
+        courseRepository.save(course8);
+
+        Section section22 = new Section();
+        section22.setName("Conceitos básicos");
+        section22.setLessons(List.of(lesson3, lesson4, lesson5, lesson6, lesson7));
+
+        Section section23 = new Section();
+        section23.setName("Próximos passos");
+        section23.setLessons(List.of(lesson23, lesson24, lesson25, lesson26));
+
+        sectionRepository.save(section22);
+        sectionRepository.save(section23);
+
+
+        Course course9 = new Course();
+        course9.setTitle("Como iniciar sua carreira");
+        course9.setDescription("Aqui vão minhas dicas iniciais para você começar sua carreira com o pé direito, afinal não é só de linkedin que se faz o programador.Boa Viagem!");
+        course9.setCreator("Inácio da Silva");
+        course9.setCategory(StackCategories.SOFT_SKILLS);
+        course9.setDifficulty(Difficulty.BEGINNER);
+        course9.setVisible(true);
+        course9.setSections(List.of(section22, section23));
+
+        courseRepository.save(course9);
+
+        Section section24 = new Section();
+        section24.setName("Aulas para ver");
+        section24.setLessons(List.of(lesson3, lesson4, lesson5, lesson6, lesson7, lesson8, lesson9));
+
+        Section section25 = new Section();
+        section25.setName("Seria bom revisar");
+        section25.setLessons(List.of(lesson23, lesson24, lesson25, lesson26, lesson21, lesson20));
+
+        sectionRepository.save(section24);
+        sectionRepository.save(section25);
+
+
+        Course course10 = new Course();
+        course10.setTitle("Curso que criei pra anotar minhas aulas");
+        course10.setDescription("Fiz isso aqui só pra ter onde anotar mesmo");
+        course10.setCreator("Graça Moraes");
+        course10.setCategory(StackCategories.FRONT_END);
+        course10.setDifficulty(Difficulty.FULL_FORMATION);
+        course10.setVisible(true);
+        course10.setSections(List.of(section24, section25));
+
+        courseRepository.save(course10);
 
     }
 
