@@ -28,5 +28,6 @@ public class CompleteAppUserDTO {
         email = user.getEmail();
         stackCategories = user.getStackCategories();
         badges = user.getBadges();
+        role = user.getRole();
     }
 }
