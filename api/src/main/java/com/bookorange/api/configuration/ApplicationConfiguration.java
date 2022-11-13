@@ -549,11 +549,11 @@ public class ApplicationConfiguration {
         courseRepository.save(course5);
 
         Section section14 = new Section();
-        section14.setName("Global");
+        section14.setName("Novos conceitos");
         section14.setLessons(List.of(lesson13, lesson14, lesson15, lesson16, lesson17));
 
         Section section15 = new Section();
-        section15.setName("Livros");
+        section15.setName("Como estudar");
         section15.setLessons(List.of(lesson23, lesson24, lesson25, lesson26));
 
         sectionRepository.save(section14);
