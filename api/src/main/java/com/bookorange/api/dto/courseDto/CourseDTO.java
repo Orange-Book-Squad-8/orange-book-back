@@ -43,5 +43,6 @@ public class CourseDTO {
         category = course.getCategory();
         difficulty = course.getDifficulty();
         visible = course.getVisible();
+        totalLessons = course.getTotalLessons();
     }
 }

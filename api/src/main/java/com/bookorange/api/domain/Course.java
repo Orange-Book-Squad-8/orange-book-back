@@ -41,6 +41,10 @@ public class Course {
         return sections.stream().mapToInt(Section::getDuration).sum();
     }
 
+    public Integer getTotalLessons() {
+        return sections.stream().mapToInt(Section::getTotalLessons).sum();
+    }
+
     public void addSection(Section section) {
         if (section == null) throw new IllegalArgumentException("section cannot be null");
         if (sections.contains(section)) throw new IllegalArgumentException("section already exists");

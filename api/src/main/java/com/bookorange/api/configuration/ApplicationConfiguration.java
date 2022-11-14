@@ -226,7 +226,7 @@ public class ApplicationConfiguration {
         Lesson lesson3 = new Lesson();
         lesson3.setTitle("Migração de Carreira");
         lesson3.setDescription("Artigo para direcionar quem está passando por estra transição e obter um direcionamento");
-        lesson3.setAuthor("Orange Juice");
+        lesson3.setAuthor("Orange Originals");
         lesson3.setLink("https://medium.com/orangejuicefc/guia-definitivo-de-como-migrar-para-ux-design-5-passos-para-virar-um-ux-1675f71796b4");
         lesson3.setTopic("Global");
         lesson3.setContentType(ContentType.ARTICLE);
@@ -237,7 +237,7 @@ public class ApplicationConfiguration {
         Lesson lesson4 = new Lesson();
         lesson4.setTitle("Migração de Carreira");
         lesson4.setDescription("Artigo para direcionar quem está passando por estra transição e obter um direcionamento");
-        lesson4.setAuthor("Orange Juice");
+        lesson4.setAuthor("Orange Originals");
         lesson4.setLink("https://medium.com/orangejuicefc/design-thinking-e-carreira-como-migrei-de-psicologia-para-ux-design-cb79e8b47df5");
         lesson4.setTopic("Global");
         lesson4.setContentType(ContentType.ARTICLE);
@@ -248,7 +248,7 @@ public class ApplicationConfiguration {
         Lesson lesson5 = new Lesson();
         lesson5.setTitle("Migração de Carreira");
         lesson5.setDescription("Artigo para direcionar quem está passando por estra transição e obter um direcionamento");
-        lesson5.setAuthor("Orange Juice");
+        lesson5.setAuthor("Orange Originals");
         lesson5.setLink("https://medium.com/orangejuicefc/de-advogada-a-desenvolvedora-um-relato-sobre-minha-migra%C3%A7%C3%A3o-de-carreira-e-dicas-para-quem-pretende-45ad5df833b5");
         lesson5.setTopic("Global");
         lesson5.setContentType(ContentType.ARTICLE);
@@ -293,7 +293,7 @@ public class ApplicationConfiguration {
         Lesson lesson9 = new Lesson();
         lesson9.setTitle("UX Desing");
         lesson9.setDescription("Mas o que é UX? Descubra por aqui");
-        lesson9.setAuthor("Orange Juice");
+        lesson9.setAuthor("Orange Originals");
         lesson9.setLink("https://medium.com/orangejuicefc/mas-o-que-%C3%A9-ux-330edd9c6887");
         lesson9.setTopic("UX/UI");
         lesson9.setContentType(ContentType.ARTICLE);
@@ -348,7 +348,7 @@ public class ApplicationConfiguration {
         Lesson lesson14 = new Lesson();
         lesson14.setTitle("Teste de Usabilidade");
         lesson14.setDescription("Live da Orange juice para mostrar o quanto é importante a fase de testes, para gerar resultados e melhorias ao seu protótipo.");
-        lesson14.setAuthor("Orange Juice");
+        lesson14.setAuthor("Orange Originals");
         lesson14.setLink("https://www.youtube.com/watch?v=VMXF3EDXZT8");
         lesson14.setTopic("UX/UI");
         lesson14.setContentType(ContentType.VIDEO);
@@ -370,7 +370,7 @@ public class ApplicationConfiguration {
         Lesson lesson16 = new Lesson();
         lesson16.setTitle("Qual a melhor linguagem de programação? Com William da Silva");
         lesson16.setDescription("Os profissionais da FCamara falam sobre a experiência como júnior, planos para o futuro profissional");
-        lesson16.setAuthor("Orange Juice");
+        lesson16.setAuthor("Orange Originals");
         lesson16.setLink("https://www.youtube.com/watch?v=qZ4ZKJSmf4k");
         lesson16.setTopic("Desenvolvimento");
         lesson16.setContentType(ContentType.VIDEO);
@@ -517,7 +517,7 @@ public class ApplicationConfiguration {
         Course course4 = new Course();
         course4.setTitle("Trilha FullStack");
         course4.setDescription("Trilha direcionada a quem quer dar seus primeiros passos nessa jornada, de forma bem completa.Boa Viagem!");
-        course4.setCreator("Orange Juice");
+        course4.setCreator("Orange Originals");
         course4.setCategory(StackCategories.FULLSTACK);
         course4.setDifficulty(Difficulty.BEGINNER);
         course4.setVisible(true);
@@ -540,7 +540,7 @@ public class ApplicationConfiguration {
         Course course5 = new Course();
         course5.setTitle("Trilha UI/UX");
         course5.setDescription("Trilha direcionada a quem quer dar seus primeiros passos nessa jornada, de forma bem completa.Boa Viagem!");
-        course5.setCreator("Orange Juice");
+        course5.setCreator("Orange Originals");
         course5.setCategory(StackCategories.UI);
         course5.setDifficulty(Difficulty.BEGINNER);
         course5.setVisible(true);
@@ -563,7 +563,7 @@ public class ApplicationConfiguration {
         Course course6 = new Course();
         course6.setTitle("Trilha Soft Skills");
         course6.setDescription("Trilha direcionada a quem quer dar seus primeiros passos nessa jornada, de forma bem completa.Boa Viagem!");
-        course6.setCreator("Orange Juice");
+        course6.setCreator("Orange Originals");
         course6.setCategory(StackCategories.SOFT_SKILLS);
         course6.setDifficulty(Difficulty.BEGINNER);
         course6.setVisible(true);
@@ -591,7 +591,7 @@ public class ApplicationConfiguration {
         Course course7 = new Course();
         course7.setTitle("Java avançado");
         course7.setDescription("Trilha direcionada a quem já está encaminhado na tecnologia mas ainda quer dara aquela turbinada final.Boa Viagem!");
-        course7.setCreator("Orange Juice");
+        course7.setCreator("Orange Originals");
         course7.setCategory(StackCategories.BACK_END);
         course7.setDifficulty(Difficulty.ADVANCED);
         course7.setVisible(true);
@@ -619,7 +619,7 @@ public class ApplicationConfiguration {
         Course course8 = new Course();
         course8.setTitle("Seja um usuário para também ter sua Experience");
         course8.setDescription("Aqui você vai ver por outro ângulo o que seria de fato a experiência que você vai passar através da sua aplicação de forma bem completa.Boa Viagem!");
-        course8.setCreator("Orange Juice");
+        course8.setCreator("Orange Originals");
         course8.setCategory(StackCategories.UX);
         course8.setDifficulty(Difficulty.INTERMEDIATE);
         course8.setVisible(true);
