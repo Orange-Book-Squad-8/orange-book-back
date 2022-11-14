@@ -1,5 +1,6 @@
 package com.bookorange.api.dto.sectionDto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class SectionCreateDTO {
 
+    @ApiModelProperty(value = "Nome da seção do curso")
     @NotBlank(message = "field not found")
     private String name;
 }

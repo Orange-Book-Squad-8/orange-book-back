@@ -4,6 +4,7 @@ import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.roleDto.RoleCreateDTO;
 import com.bookorange.api.dto.roleDto.RoleDTO;
 import com.bookorange.api.service.RoleService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class RoleController {
 
     private final RoleService roleService;
 
+    @ApiOperation("API responsável por criar uma role para definir o tipo do usuário (user, admin)")
     @PostMapping(value = "/create")
     public ResponseEntity<RoleDTO> createRole(@Valid @RequestBody RoleCreateDTO roleCreateDTO) {
         try {

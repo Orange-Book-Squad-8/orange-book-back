@@ -7,6 +7,7 @@ import com.bookorange.api.dto.sectionDto.SectionDTO;
 import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 import com.bookorange.api.service.LessonService;
 import com.bookorange.api.service.SectionService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class SectionController {
     private final LessonService lessonService;
 
 
+    @ApiOperation("API responsável por atualizar uma seção")
     @PutMapping(value = "/update")
     public ResponseEntity<Section> updateSection(@Valid @RequestBody SectionDTO sectionDTO) {
         try {
@@ -35,6 +37,7 @@ public class SectionController {
         }
     }
 
+    @ApiOperation("API responsável por adicionar uma lição em uma seção")
     @PostMapping(value = "/new_lesson")
     public ResponseEntity<Section> addLesson(@RequestBody SectionAddLessonDTO sectionEditLessonDTO) {
         try {
@@ -46,6 +49,7 @@ public class SectionController {
         }
     }
 
+    @ApiOperation("API responsável por remover uma lição de uma seção")
     @DeleteMapping(value = "/remove_lesson")
     public ResponseEntity<Void> removeLesson(@RequestBody SectionAddLessonDTO sectionEditLessonDTO) {
         try {

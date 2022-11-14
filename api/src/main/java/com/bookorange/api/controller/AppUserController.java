@@ -11,6 +11,7 @@ import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
 import com.bookorange.api.handler.exception.ForbiddenException;
 import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.service.*;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,8 @@ public class AppUserController {
     private final RoleService roleService;
     private final AppUserWatchedLessonService watchedListService;
 
+
+    @ApiOperation("API responsável por criar os usuários")
     @PostMapping(value = "/create")
     public ResponseEntity<AppUserDTO> createAppUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
         Role role = roleService.findByName(userCreateDTO.getRole());
@@ -40,12 +43,14 @@ public class AppUserController {
         return ResponseEntity.ok(new AppUserDTO(createdAppUser));
     }
 
+    @ApiOperation("API responsável por editar o usuário")
     @PutMapping(value = "/edit")
     public ResponseEntity<AppUserDTO> editAppUser(@Valid @RequestBody AppUserDTO appUserDTO) {
         AppUser editedUser = appUserService.update(appUserDTO);
         return ResponseEntity.ok(new AppUserDTO(editedUser));
     }
 
+    @ApiOperation("API responsável por logar o usuário na plataforma")
     @PostMapping(value = "/login")
     public ResponseEntity<AppUserDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
@@ -62,6 +67,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por buscar um único usuário ")
     @GetMapping(value = "/{id}/find")
     public ResponseEntity<CompleteAppUserDTO> findById(@PathVariable Long id) {
         try {
@@ -73,6 +79,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por marcar como lida uma lição")
     @PutMapping("/watched")
     public ResponseEntity<Void> setWatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
         try {
@@ -86,6 +93,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por desmarcar uma lição que antes era marcarda como lida")
     @PutMapping("/unwatched")
     public ResponseEntity<Void> setUnwatched(@RequestBody SetWatchedLessonDTO setWatchedLessonDTO) {
         try {
@@ -99,6 +107,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por retornar os cursos do usuário")
     @GetMapping("/{id}/courses")
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
@@ -126,7 +135,7 @@ public class AppUserController {
         }
     }
 
-
+    @ApiOperation("API responsável por adicionar o usuário na lista de 'cursos inscritos'")
     @PostMapping(value = "/addSubscribedCourses")
     public ResponseEntity<Void> addSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
@@ -138,6 +147,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por remover o usuário da lista de 'cursos inscritos'")
     @DeleteMapping(value = "/removeSubscribedCourses")
     public ResponseEntity<Void> removeSubscribedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
@@ -149,6 +159,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por adicionar o usuário na lista de 'cursos arquivados'")
     @PostMapping(value = "/addArchivedCourses")
     public ResponseEntity<Void> addArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
@@ -160,6 +171,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por remover o usuário da lista de 'cursos arquivados'")
     @DeleteMapping(value = "/removeArchivedCourses")
     public ResponseEntity<Void> removeArchivedCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
@@ -171,6 +183,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por adicionar o usuário no curso especificado")
     @PostMapping(value = "/addMyCourses")
     public ResponseEntity<Void> addMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
@@ -182,6 +195,7 @@ public class AppUserController {
         }
     }
 
+    @ApiOperation("API responsável por remover o usuário do curso especificado")
     @DeleteMapping(value = "/removeMyCourses")
     public ResponseEntity<Void> removeMyCourses(@RequestBody AddCourseToUserDTO userDTO) {
         try {
@@ -193,6 +207,8 @@ public class AppUserController {
         }
     }
 
+
+    @ApiOperation("API responsável por marcar um curso como finalizado")
     @PutMapping(value = "/finishCourses")
     public ResponseEntity<Void> finishCourse(@RequestBody AddCourseToUserDTO userDTO) {
         try {

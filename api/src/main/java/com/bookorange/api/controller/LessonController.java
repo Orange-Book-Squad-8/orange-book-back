@@ -5,6 +5,7 @@ import com.bookorange.api.dto.lessonDto.LessonCreateDTO;
 import com.bookorange.api.dto.lessonDto.LessonDTO;
 import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.service.LessonService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ public class LessonController {
 
     private final LessonService lessonService;
 
+
+    @ApiOperation("API responsável por criar uma lição")
     @PostMapping(value = "/create")
     public ResponseEntity<LessonDTO> createLesson(@Valid @RequestBody LessonCreateDTO lessonCreateDTO) {
         try {
@@ -35,6 +38,7 @@ public class LessonController {
         }
     }
 
+    @ApiOperation("API responsável por buscar uma única lição")
     @GetMapping
     public ResponseEntity<Lesson> findById(@RequestParam("lessonId") Long lessonId) {
         try {
@@ -45,6 +49,7 @@ public class LessonController {
         }
     }
 
+    @ApiOperation("API responsável por buscar todas as lições")
     @GetMapping(value = "/all")
     public ResponseEntity<List<Lesson>> findAll() {
         try {
@@ -55,6 +60,7 @@ public class LessonController {
         }
     }
 
+    @ApiOperation("API responsável por buscar as lições por determinado tópico")
     @GetMapping(value = "/topic/{topic}")
     public ResponseEntity<List<Lesson>> listByTopic(@PathVariable("topic") String topic) {
         try {
@@ -65,6 +71,7 @@ public class LessonController {
         }
     }
 
+    @ApiOperation("API responsável por buscar as lições por determinado tipo (livro, curso, artigo)")
     @GetMapping(value = "/content/{content}")
     public ResponseEntity<List<Lesson>> listByContentType(@PathVariable("content") ContentType content) {
         try {
@@ -75,6 +82,7 @@ public class LessonController {
         }
     }
 
+    @ApiOperation("API responsável por atualizar uma lição")
     @PutMapping(value = "/update")
     public ResponseEntity<Lesson> updateLesson(@Valid @RequestBody LessonDTO lessonDTO) {
         try {
@@ -85,6 +93,7 @@ public class LessonController {
         }
     }
 
+    @ApiOperation("API responsável por remover uma lição")
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Void> deleteLesson(@RequestParam("lessonId") Long lessonId) {
         try {

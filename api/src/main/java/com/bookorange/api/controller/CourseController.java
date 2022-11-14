@@ -13,6 +13,7 @@ import com.bookorange.api.enumerator.StackCategories;
 import com.bookorange.api.service.CourseService;
 import com.bookorange.api.service.LessonService;
 import com.bookorange.api.service.SectionService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,8 @@ public class CourseController {
     private final SectionService sectionService;
     private final LessonService lessonService;
 
+
+    @ApiOperation("API responsável por criar um curso")
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createCourse(@Valid @RequestBody CourseCreateDTO courseCreateDTO) {
         try {
@@ -56,6 +59,8 @@ public class CourseController {
         }
     }
 
+
+    @ApiOperation("API responsável por buscar um único curso")
     @GetMapping("/{id}")
     public ResponseEntity<CompleteCourseDTO> findById(@PathVariable("id") Long courseId) {
         try {
@@ -75,6 +80,8 @@ public class CourseController {
         }
     }
 
+
+    @ApiOperation("API responsável por buscar todos os cursos")
     @GetMapping(value = "/all")
     public ResponseEntity<List<CourseDTO>> findAll() {
         try {
@@ -86,6 +93,7 @@ public class CourseController {
         }
     }
 
+    @ApiOperation("API responsável por buscar um curso por categoria")
     @GetMapping(value = "/category/{category}")
     public ResponseEntity<List<CourseDTO>> listByCategory(@PathVariable("category") StackCategories category) {
         try {
@@ -97,6 +105,7 @@ public class CourseController {
         }
     }
 
+    @ApiOperation("API responsável por buscar um curso por dificuldade")
     @GetMapping(value = "/difficulty/{difficulty}")
     public ResponseEntity<List<CourseDTO>> listByDifficulty(@PathVariable("difficulty") Difficulty difficulty) {
         try {
@@ -108,6 +117,8 @@ public class CourseController {
         }
     }
 
+
+    @ApiOperation("API responsável por um curso por seu autor")
     @GetMapping(value = "/creator/{creator}")
     public ResponseEntity<List<CourseDTO>> listByCreator(@PathVariable("creator") String creator) {
         try {
@@ -119,6 +130,8 @@ public class CourseController {
         }
     }
 
+
+    @ApiOperation("API responsável por atualizar um curso")
     @PutMapping(value = "/update")
     public ResponseEntity<Course> updateCourse(@Valid @RequestBody CourseEditDTO courseDTO) {
         try {
@@ -130,6 +143,7 @@ public class CourseController {
         }
     }
 
+    @ApiOperation("API responsável por remover um curso")
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Void> deleteCourse(@RequestParam("courseId") Long courseId) {
         try {
@@ -140,6 +154,8 @@ public class CourseController {
         }
     }
 
+
+    @ApiOperation("API responsável por criar uma nova seção")
     @PostMapping(value = "/new_section")
     public ResponseEntity<Course> addSection(@RequestBody CourseCreateSectionDTO courseSectionEditDTO) {
         try {
@@ -151,6 +167,8 @@ public class CourseController {
         }
     }
 
+
+    @ApiOperation("API responsável por remover uma seção ")
     @DeleteMapping(value = "/remove_section")
     public ResponseEntity<Void> removeSection(@RequestBody CourseRemoveSectionDTO courseSectionEditDTO) {
         try {
@@ -163,6 +181,7 @@ public class CourseController {
         }
     }
 
+    @ApiOperation("API responsável por retornar a duração de um curso")
     @GetMapping(value = "/duration/{id}")
     public ResponseEntity<Integer> getCourseDuration(@PathVariable("id") Long courseId) {
         try {
