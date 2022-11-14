@@ -27,9 +27,9 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 	
 ### :iphone: Mobile
   <p align="center">
-    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="200px">
+    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="50px">
     
-    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="200px">
+    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="50px">
   </p>
 	
 ### 💻 Web
