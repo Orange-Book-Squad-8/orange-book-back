@@ -24,22 +24,8 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 <ul>
   
 ## 🎨 Layout
-	
+
 ### :iphone: Mobile
-  <p align="center">
-    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="50px">
-    
-    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="50px">
-  </p>
-	
-### 💻 Web
-  <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_1.png" width="400px">
-    
-    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_2.png" width="400px">
-  </p>
-  
-	### Mobile
 
 <p align="center">
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="200px">
@@ -47,7 +33,7 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="200px">
 </p>
 
-### Web
+### 💻 Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_1.png" width="400px">
