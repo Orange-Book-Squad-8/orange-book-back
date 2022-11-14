@@ -10,6 +10,7 @@ import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
+import com.bookorange.api.service.AppUserService;
 import com.bookorange.api.service.CourseService;
 import com.bookorange.api.service.LessonService;
 import com.bookorange.api.service.SectionService;
@@ -17,10 +18,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 
@@ -32,6 +31,8 @@ public class CourseController {
     private final CourseService courseService;
     private final SectionService sectionService;
     private final LessonService lessonService;
+
+    private final AppUserService appUserService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createCourse(@Valid @RequestBody CourseCreateDTO courseCreateDTO) {
@@ -48,9 +49,7 @@ public class CourseController {
                     }).toList();
             courseCreateDTO.setSections(sections);
             Course courseCreated = courseService.create(courseCreateDTO);
-            URI uri = ServletUriComponentsBuilder
-                    .fromCurrentRequest().path("/create").buildAndExpand(courseCreated.getId()).toUri();
-            return ResponseEntity.created(uri).build();
+            return ResponseEntity.ok(new CourseDTO(courseCreated));
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }

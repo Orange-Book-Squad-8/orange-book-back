@@ -103,20 +103,7 @@ public class AppUserController {
     public ResponseEntity<AppUserCourseDTO> getUserCourses(@PathVariable("id") Long id) {
         try {
             AppUser user = appUserService.findById(id);
-            List<Long> watchedList = watchedListService.getWatchedLessonList(user);
-
-            List<Course> courseList = user.getSubscribedCourses();
-            courseList.addAll(user.getArchivedCourses());
-            courseList.addAll(user.getMyCourses());
-
-            Map<Long, List<Long>> watchedLesson = new HashMap<>();
-            List<List<Long>> coursesLessons = courseList.stream().map(Course::getLessons).toList();
-
-            List<List<Long>> filteredList = coursesLessons.stream().map((lessons) -> lessons.stream().filter(watchedList::contains).toList()).toList();
-
-            for (int i = 0; i < courseList.size(); i++) {
-                watchedLesson.put(courseList.get(i).getId(), filteredList.get(i));
-            }
+            Map<Long, List<Long>> watchedLesson = getLongListMap(user);
 
             AppUserCourseDTO userCourseDTO = new AppUserCourseDTO(user, watchedLesson);
 
@@ -124,6 +111,35 @@ public class AppUserController {
         } catch (ObjectNotFoundException e) {
             throw new ObjectNotFoundException(e.getMessage());
         }
+    }
+
+    @GetMapping("/{id}/lessons")
+    public ResponseEntity<Map<Long, List<Long>>> getUserLessons(@PathVariable("id") Long id) {
+        try {
+            AppUser user = appUserService.findById(id);
+            Map<Long, List<Long>> watchedLesson = getLongListMap(user);
+            return ResponseEntity.ok(watchedLesson);
+        } catch (ObjectNotFoundException e) {
+            throw new ObjectNotFoundException(e.getMessage());
+        }
+    }
+
+    private Map<Long, List<Long>> getLongListMap(AppUser user) {
+        List<Long> watchedList = watchedListService.getWatchedLessonList(user);
+
+        List<Course> courseList = user.getSubscribedCourses();
+        courseList.addAll(user.getArchivedCourses());
+        courseList.addAll(user.getMyCourses());
+
+        Map<Long, List<Long>> watchedLesson = new HashMap<>();
+        List<List<Long>> coursesLessons = courseList.stream().map(Course::getLessons).toList();
+
+        List<List<Long>> filteredList = coursesLessons.stream().map((lessons) -> lessons.stream().filter(watchedList::contains).toList()).toList();
+
+        for (int i = 0; i < courseList.size(); i++) {
+            watchedLesson.put(courseList.get(i).getId(), filteredList.get(i));
+        }
+        return watchedLesson;
     }
 
 

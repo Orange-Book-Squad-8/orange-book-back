@@ -37,7 +37,13 @@ public class AppUserWatchedLessonServiceImp implements AppUserWatchedLessonServi
 
             userWatchedLessonRepository.save(watched);
         } else {
-            throw new ForbiddenException("Lesson already watched");
+            if (appUserWatched.getWatched()) throw new ForbiddenException("Lesson already watched");
+            appUserWatched.setWatched(true);
+            appUserWatched.setAppUser(watchedLesson.getUser());
+            appUserWatched.setLesson(watchedLesson.getLesson());
+
+            userWatchedLessonRepository.save(appUserWatched);
+
         }
 
     }
