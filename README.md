@@ -28,17 +28,17 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 ### :iphone: Mobile
 
 <p align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="200px">
+  <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_1.jpeg" width="200px">
 
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="200px">
+  <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_2.jpeg" width="200px">
 </p>
 
 ### 💻 Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_1.png" width="400px">
+  <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_1.jpeg" width="400px">
 
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_2.png" width="400px">
+  <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_2.jpeg" width="400px">
 </p>
 
 
