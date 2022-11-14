@@ -27,16 +27,16 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 	
 ### :iphone: Mobile
   <p align="center">
-    <img alt="OrangeBook" title="#OrangeBook" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="200px">
+    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_1.png" width="200px">
     
-    <img alt="OrangeBook" title="#OrangeBook" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="200px">
+    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_tela_2.png" width="200px">
   </p>
 	
 ### 💻 Web
   <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-    <img alt="OrangeBook" title="#OrangeBook" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_1.png" width="400px">
+    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_1.png" width="400px">
     
-    <img alt="OrangeBook" title="#OrangeBook" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_2.png" width="400px">
+    <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_tela_2.png" width="400px">
   </p>
   
 
