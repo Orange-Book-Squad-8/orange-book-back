@@ -16,12 +16,11 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 
  :books: Orange Book - é uma plataforma de ensino, que onde seus usuários podem acessar trilhas exclusivas da comunidade tech mais vitaminada, a <a href="https://digital.fcamara.com.br/orangejuice">Orange Juice</a>. Mas além de disponibilizar as trilhas de forma organizada, ela oferece:
  
-<ul>
-  <li>Fórum para debater, tirar dúvidas ou interagir com a comunidade.</li>
-  <li>Bloco de anotações, para fazer registros pontuais de um assunto, sem a necessidade de abrir outro programa.</li>
-  <li>Liberdade para gerenciar suas trilhas, da forma que for mais conveniente, de forma simples e intuitiva.</li>
-  <li>Design responsivo, pode acessar de qualquer lugar.</li>
-<ul>
+- Fórum para debater, tirar dúvidas ou interagir com a comunidade.</li>
+- Bloco de anotações, para fazer registros pontuais de um assunto, sem a necessidade de abrir outro programa.</li>
+- Liberdade para gerenciar suas trilhas, da forma que for mais conveniente, de forma simples e intuitiva.</li>
+- Design responsivo, pode acessar de qualquer lugar.</li>
+
 
 <hr>
 
@@ -57,6 +56,12 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [H2]()
 - [TypeScrip Generator]()
 
+## :construction_worker: Admin
+O usuário tem a liberdade de acessar as trilhas e montar as suas próprias. Mas para editar o conteúdo das lições, precisa estar logado como administrador, abaixo estará login e senha:
+
+Login       | Senha
+------------| -------------
+ thiago_adm | minhasenha123
 
 ## 📝 Licença
 Feito por:	
