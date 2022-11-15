@@ -56,6 +56,23 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [H2]()
 - [TypeScrip Generator]()
 
+## :rocket: Como Rodar o Projeto
+
+Primeiro você deve garantir que o [Java](https://www.java.com/pt-BR/download/manual.jsp) esteja instalado. Após isso faça o [download](https://drive.google.com/file/d/18TMtuJIqRtbw5hPidBkxaE6L4XfPO3d5/view?usp=share_link), e abra o prompt de comando.
+
+```bash
+	#navegue até a pasta do arquivo, através do comando cd
+	$ cd caminho até a pasta do arquivo
+	
+	#digite o comando para rodar (após digitar o 'api', aperte TAB, para completar automaticamente)
+	$ java -jar api-0.0.1-SNAPSHOT.jar
+	
+	# o projeto estará rodando na url http://localhost:8080/swagger-ui/#/
+	
+	# para encerrar a aplicação, aperte:
+	$ CTRL + c
+```
+
 ## :construction_worker: Admin
 O usuário tem a liberdade de acessar as trilhas e montar as suas próprias. Mas para editar o conteúdo das lições, precisa estar logado como administrador, abaixo estará login e senha:
 
@@ -68,5 +85,10 @@ Feito por:
 - [Caio](https://github.com/caioandre182)
 - [Marcelo](https://github.com/MarceloRibeiro1)
 - [Pedro Yure](https://github.com/nogueirayure001")
+
+## :book: Referência
+- https://dzone.com/articles/best-practice-for-exception-handling-in-spring-boo
+- https://dev.to/vitordevsp/padronizacao-de-commit-com-commitlint-husky-e-commitizen-3g1n
+- https://www.baeldung.com/spring-rest-openapi-documentation
 
 
