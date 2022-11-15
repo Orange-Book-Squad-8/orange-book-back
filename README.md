@@ -27,7 +27,7 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 
 ## 🎨 Layout
 
-	<br>
+
 ### :iphone: Mobile 
 
 <p align="center">
@@ -38,31 +38,26 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 
 ### 💻 Web
 
-	<br>
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center; ">
   <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_1.jpeg" width="400px" style="padding: 5px;">
 
   <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_2.jpeg" width="400px" style="padding: 5px;">
 </p>
 
+## 🛠 Tecnologias
 
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+As seguintes ferramentas foram usadas na construção do projeto:
+	
+#### Spring Boot
+	- <a href="https://junit.org/junit5/">JUnit</a>
+	- <a href="https://projectlombok.org/">Lombok</a>
+	- <a href="https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/validation.html">Validation</a>
+	- <a href="https://springfox.github.io/springfox/docs/current/">Spring Fox</a>
+	- <a href="https://www.h2database.com/html/main.html">H2></a>
+
+## 📝 Licença
+	
+Feito por:
+	- <a href="https://github.com/caioandre182">Caio</a>
+	- <a href="https://github.com/MarceloRibeiro1">Marcelo</a>
+	- <a href="https://github.com/nogueirayure001">Pedro</a>
