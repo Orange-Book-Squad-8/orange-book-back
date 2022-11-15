@@ -22,10 +22,13 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
   <li>Liberdade para gerenciar suas trilhas, da forma que for mais conveniente, de forma simples e intuitiva.</li>
   <li>Design responsivo, pode acessar de qualquer lugar.</li>
 <ul>
-  
+
+<hr>
+
 ## 🎨 Layout
 
-	<center> <h2> :iphone: Mobile </h2> </center>
+	<br>
+### :iphone: Mobile 
 
 <p align="center">
   <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_1.jpeg" width="200px" style="padding: 10px;">
@@ -33,8 +36,9 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
   <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/mobile_2.jpeg" width="200px" style="padding: 10px;">
 </p>
 
-	<center> <h2> 💻 Web</h2> </center>
+### 💻 Web
 
+	<br>
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center; ">
   <img src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/web_1.jpeg" width="400px" style="padding: 5px;">
 
