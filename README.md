@@ -49,19 +49,19 @@ A área de Tecnologia da Informação, sem dúvidas é a profissão do futuro. N
 As seguintes ferramentas foram usadas na construção do projeto:
 	
 #### Spring Boot
-	<ul>
-		<li<a href="https://junit.org/junit5/">JUnit</a>></li>
-		<li><a href="https://projectlombok.org/">Lombok</a></li>
-		<li><a href="https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/validation.html">Validation</a></li>
-		<li><a href="https://springfox.github.io/springfox/docs/current/">Spring Fox</a></li>
-		<li><a href="https://www.h2database.com/html/main.html">H2></a></li>
-	<ul>
+
+- [JUnit]()
+- [Lombok]()
+- [Validation]()
+- [Spring Fox]()
+- [H2]()
+- [TypeScrip Generator]()
+
 
 ## 📝 Licença
-	Feito por:	
-	<ul>
-		<li><a href="https://github.com/caioandre182">Caio</a></li>
-		<li><a href="https://github.com/MarceloRibeiro1">Marcelo</a></li>
-		<li><a href="https://github.com/nogueirayure001">Pedro</a></li>
-	<ul>
+Feito por:	
+- [Caio](https://github.com/caioandre182)
+- [Marcelo](https://github.com/MarceloRibeiro1)
+- [Pedro Yure](https://github.com/nogueirayure001")
+
 
