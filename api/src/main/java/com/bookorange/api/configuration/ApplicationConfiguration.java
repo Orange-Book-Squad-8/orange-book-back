@@ -530,14 +530,14 @@ public class ApplicationConfiguration {
 
 
         Section section12 = new Section();
-        section11.setName("UI/UX");
-        section11.setLessons(List.of(lesson8, lesson9, lesson10, lesson11, lesson12, lesson13, lesson14, lesson15));
+        section12.setName("UI/UX");
+        section12.setLessons(List.of(lesson8, lesson9, lesson10, lesson11, lesson12, lesson13, lesson14, lesson15));
+        sectionRepository.save(section12);
 
         Section section13 = new Section();
         section13.setName("Global");
         section13.setLessons(List.of(lesson3, lesson4, lesson5, lesson6, lesson7));
 
-        sectionRepository.save(section12);
         sectionRepository.save(section13);
 
         Course course5 = new Course();
@@ -583,8 +583,8 @@ public class ApplicationConfiguration {
         section17.setLessons(List.of(lesson23, lesson24, lesson25, lesson26, lesson22, lesson21));
 
         Section section18 = new Section();
-        section17.setName("Conceitos Adicionais");
-        section17.setLessons(List.of(lesson10, lesson11, lesson12, lesson13));
+        section18.setName("Conceitos Adicionais");
+        section18.setLessons(List.of(lesson10, lesson11, lesson12, lesson13));
 
         sectionRepository.save(section16);
         sectionRepository.save(section17);
