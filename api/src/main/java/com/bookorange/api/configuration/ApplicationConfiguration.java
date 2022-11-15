@@ -123,7 +123,7 @@ public class ApplicationConfiguration {
         //              DATABASE
         // ROLE
         Role userRole = new Role();
-        userRole.setName("user1");
+        userRole.setName("user");
 
         Role admRole = new Role();
         admRole.setName("admin");
