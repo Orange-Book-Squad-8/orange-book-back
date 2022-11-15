@@ -4,6 +4,7 @@ import com.bookorange.api.enumerator.StackCategories;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ import java.util.List;
 public class AppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
 
 
