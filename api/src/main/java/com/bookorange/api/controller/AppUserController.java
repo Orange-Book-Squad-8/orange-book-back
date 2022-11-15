@@ -24,7 +24,6 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/users")
-@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RequiredArgsConstructor
 public class AppUserController {
     private final AppUserService appUserService;

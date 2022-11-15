@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/lessons")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://127.0.0.1:5173")
 public class LessonController {
 
     private final LessonService lessonService;
