@@ -33,11 +33,16 @@ public class Course {
 
     private Boolean visible = true;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Section> sections = new ArrayList<>();
+
 
     public Integer getDuration() {
         return sections.stream().mapToInt(Section::getDuration).sum();
+    }
+
+    public Integer getTotalLessons() {
+        return sections.stream().mapToInt(Section::getTotalLessons).sum();
     }
 
     public void addSection(Section section) {
@@ -54,4 +59,23 @@ public class Course {
         sections.remove(section);
     }
 
+    public List<Long> getLessons() {
+        List<Long> result = new ArrayList<>();
+        sections.forEach(section -> result.addAll(section.getLessons()));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", creator='" + creator + '\'' +
+                ", category=" + category +
+                ", difficulty=" + difficulty +
+                ", visible=" + visible +
+                ", sections=" + sections +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ import com.bookorange.api.domain.Section;
 import com.bookorange.api.dto.sectionDto.SectionCreateDTO;
 import com.bookorange.api.dto.sectionDto.SectionDTO;
 import com.bookorange.api.dto.sectionDto.SectionEditLessonDTO;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.repository.SectionRepository;
 import com.bookorange.api.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class SectionServiceImp implements SectionService {
 
     @Override
     public Section findById(Long sectionId) {
-        return sectionRepository.findById(sectionId).orElseThrow(() -> new RuntimeException("Could not find section"));
+        return sectionRepository.findById(sectionId).orElseThrow(() -> new ObjectNotFoundException("Could not find section"));
     }
 
 }

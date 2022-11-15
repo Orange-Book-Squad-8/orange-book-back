@@ -4,7 +4,7 @@ import com.bookorange.api.domain.Course;
 import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.domain.Section;
 import com.bookorange.api.dto.courseDto.CourseCreateDTO;
-import com.bookorange.api.dto.courseDto.CourseDTO;
+import com.bookorange.api.dto.courseDto.CourseEditDTO;
 import com.bookorange.api.dto.courseDto.CourseSectionEditDTO;
 import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.enumerator.Difficulty;
@@ -81,7 +81,7 @@ class CourseServiceImpTest {
     @Test
     void update() {
         Mockito.when(courseRepository.findById(Mockito.any())).thenReturn(Optional.of(new Course()));
-        courseServiceImp.update(new CourseDTO());
+        courseServiceImp.update(new CourseEditDTO());
         Mockito.verify(courseRepository, Mockito.times(1)).save(Mockito.any());
     }
 

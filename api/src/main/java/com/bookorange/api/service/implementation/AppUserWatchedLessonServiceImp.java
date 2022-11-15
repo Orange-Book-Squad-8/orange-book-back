@@ -4,6 +4,7 @@ import com.bookorange.api.domain.AppUser;
 import com.bookorange.api.domain.Lesson;
 import com.bookorange.api.domain.UserWatchedLesson;
 import com.bookorange.api.dto.watchedDto.WatchedLessonDTO;
+import com.bookorange.api.handler.exception.ForbiddenException;
 import com.bookorange.api.repository.UserWatchedLessonRepository;
 import com.bookorange.api.service.AppUserWatchedLessonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,13 @@ public class AppUserWatchedLessonServiceImp implements AppUserWatchedLessonServi
 
             userWatchedLessonRepository.save(watched);
         } else {
-            throw new RuntimeException("Lesson already watched");
+            if (appUserWatched.getWatched()) throw new ForbiddenException("Lesson already watched");
+            appUserWatched.setWatched(true);
+            appUserWatched.setAppUser(watchedLesson.getUser());
+            appUserWatched.setLesson(watchedLesson.getLesson());
+
+            userWatchedLessonRepository.save(appUserWatched);
+
         }
 
     }

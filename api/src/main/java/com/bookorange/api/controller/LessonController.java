@@ -8,8 +8,12 @@ import com.bookorange.api.service.LessonService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/lessons")
@@ -18,13 +22,15 @@ public class LessonController {
 
     private final LessonService lessonService;
 
-    @PostMapping(value = "/lessons")
-    public ResponseEntity<LessonDTO> createLesson(@RequestBody LessonCreateDTO lessonCreateDTO) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<LessonDTO> createLesson(@Valid @RequestBody LessonCreateDTO lessonCreateDTO) {
         try {
             Lesson lessonCreated = lessonService.create(lessonCreateDTO);
-            return ResponseEntity.ok(new LessonDTO(lessonCreated));
+            URI uri = ServletUriComponentsBuilder
+                    .fromCurrentRequest().path("/create").buildAndExpand(lessonCreated.getId()).toUri();
+            return ResponseEntity.created(uri).build();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -34,7 +40,7 @@ public class LessonController {
             Lesson lesson = lessonService.findById(lessonId);
             return ResponseEntity.ok(lesson);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -44,7 +50,7 @@ public class LessonController {
             List<Lesson> allLessons = lessonService.findAll();
             return ResponseEntity.ok(allLessons);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -54,7 +60,7 @@ public class LessonController {
             List<Lesson> lessonsByTopic = lessonService.findByTopic(topic);
             return ResponseEntity.ok(lessonsByTopic);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -64,17 +70,17 @@ public class LessonController {
             List<Lesson> lessonsByContentType = lessonService.findByContentType(content);
             return ResponseEntity.ok(lessonsByContentType);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Lesson> updateLesson(@RequestBody LessonDTO lessonDTO) {
+    public ResponseEntity<Lesson> updateLesson(@Valid @RequestBody LessonDTO lessonDTO) {
         try {
             Lesson lessonUpdate = lessonService.update(lessonDTO);
             return ResponseEntity.ok(lessonUpdate);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -84,7 +90,7 @@ public class LessonController {
             lessonService.delete(lessonId);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

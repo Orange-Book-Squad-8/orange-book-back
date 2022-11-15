@@ -1,6 +1,7 @@
 package com.bookorange.api.dto.courseDto;
 
 import com.bookorange.api.domain.Course;
+import com.bookorange.api.domain.Section;
 import com.bookorange.api.enumerator.Difficulty;
 import com.bookorange.api.enumerator.StackCategories;
 import lombok.AllArgsConstructor;
@@ -9,11 +10,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CourseDTO {
+public class CourseEditDTO {
     private Long id;
 
     @NotBlank(message = "field not found")
@@ -33,9 +36,11 @@ public class CourseDTO {
 
     private Boolean visible;
 
-    private Integer totalLessons;
+    private List<Section> sections = new ArrayList<>();
 
-    public CourseDTO(Course course) {
+    private List<Long> deletedSectionIds = new ArrayList<>();
+
+    public CourseEditDTO(Course course) {
         id = course.getId();
         title = course.getTitle();
         description = course.getDescription();
@@ -43,6 +48,6 @@ public class CourseDTO {
         category = course.getCategory();
         difficulty = course.getDifficulty();
         visible = course.getVisible();
-        totalLessons = course.getTotalLessons();
+        sections = course.getSections();
     }
 }

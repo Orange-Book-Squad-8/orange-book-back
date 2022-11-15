@@ -1,18 +1,18 @@
 package com.bookorange.api.dto.sectionDto;
 
+import com.bookorange.api.domain.Lesson;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-public class SectionCreateDTO {
-
-    @NotBlank(message = "field not found")
+public class CompleteSectionDTO {
+    private Long id;
     private String name;
+    private List<Lesson> lessons = new ArrayList<>();
 }

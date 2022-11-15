@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+
 @RestController
 @RequestMapping(value = "/sections")
 @AllArgsConstructor
@@ -22,12 +25,12 @@ public class SectionController {
 
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Section> updateSection(@RequestBody SectionDTO sectionDTO) {
+    public ResponseEntity<Section> updateSection(@Valid @RequestBody SectionDTO sectionDTO) {
         try {
             Section sectionUpdate = sectionService.update(sectionDTO);
             return ResponseEntity.ok(sectionUpdate);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -38,7 +41,7 @@ public class SectionController {
             sectionService.addLesson(new SectionEditLessonDTO(sectionEditLessonDTO.getSectionId(), lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -49,7 +52,8 @@ public class SectionController {
             sectionService.removeLesson(new SectionEditLessonDTO(sectionEditLessonDTO.getSectionId(), lesson));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
+
 }

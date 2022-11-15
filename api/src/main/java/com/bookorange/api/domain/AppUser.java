@@ -2,35 +2,42 @@ package com.bookorange.api.domain;
 
 import com.bookorange.api.enumerator.StackCategories;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     private String username;
+
 
     private String password;
 
+
     private String email;
+
 
     @ElementCollection
     private List<StackCategories> stackCategories = new ArrayList<>();
 
     @ElementCollection
     private List<String> badges = new ArrayList<>();
+
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;

@@ -3,6 +3,7 @@ package com.bookorange.api.service.implementation;
 import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.roleDto.RoleCreateDTO;
 import com.bookorange.api.dto.roleDto.RoleDTO;
+import com.bookorange.api.handler.exception.BadRequestException;
 import com.bookorange.api.repository.RoleRepository;
 import com.bookorange.api.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,11 @@ public class RoleServiceImp implements RoleService {
 
     @Override
     public Role findByName(String roleName) {
-        return roleRepository.findByName(roleName);
+            Role role = roleRepository.findByName(roleName);
+            if(role == null){
+                throw new BadRequestException("Role incorrect!");
+            }
+            return role;
     }
 
     @Override

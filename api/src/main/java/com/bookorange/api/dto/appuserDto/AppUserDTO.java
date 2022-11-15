@@ -1,37 +1,37 @@
 package com.bookorange.api.dto.appuserDto;
 
 import com.bookorange.api.domain.AppUser;
-import com.bookorange.api.domain.Role;
-import com.bookorange.api.enumerator.StackCategories;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class AppUserDTO {
+
     private Long id;
 
+
+    @NotBlank(message = "field not found")
+    @Length(min = 3, max = 30, message = "username needs at least 3 characters")
     private String username;
 
+
+    @NotBlank(message = "field not found")
+    @Email(message = "email must be unique")
     private String email;
 
-    private List<StackCategories> stackCategories;
-
-    private List<String> badges;
-
-    private Role role;
 
     public AppUserDTO(AppUser user) {
         id = user.getId();
         username = user.getUsername();
         email = user.getEmail();
-        stackCategories = user.getStackCategories();
-        badges = user.getBadges();
-        role = user.getRole();
     }
 
 }

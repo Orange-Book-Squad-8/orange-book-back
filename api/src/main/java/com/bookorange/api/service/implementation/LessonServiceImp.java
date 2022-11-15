@@ -7,6 +7,7 @@ import com.bookorange.api.dto.lessonDto.LessonDTO;
 import com.bookorange.api.enumerator.ContentType;
 import com.bookorange.api.repository.LessonRepository;
 import com.bookorange.api.service.LessonService;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,22 +38,28 @@ public class LessonServiceImp implements LessonService {
 
     @Override
     public Lesson findById(Long lessonId) {
-        return lessonRepository.findById(lessonId).orElseThrow(() -> new RuntimeException("Couldn't find lesson"));
+        return lessonRepository.findById(lessonId).orElseThrow(() -> new ObjectNotFoundException("Not found lesson"));
     }
 
     @Override
     public List<Lesson> findAll() {
-        return lessonRepository.findAll();
+        List<Lesson> list = lessonRepository.findAll();
+        if(list.isEmpty()) throw new ObjectNotFoundException("List empty");
+        return list;
     }
 
     @Override
     public List<Lesson> findByTopic(String topic) {
-        return lessonRepository.findByTopic(topic);
+        List<Lesson> list = lessonRepository.findByTopic(topic);
+        if(list.isEmpty()) throw new ObjectNotFoundException("Not found lessons for topic: " + topic);
+        return list;
     }
 
     @Override
     public List<Lesson> findByContentType(ContentType contentType) {
-        return lessonRepository.findByContentType(contentType);
+        List<Lesson> list = lessonRepository.findByContentType(contentType);
+        if(list.isEmpty()) throw new ObjectNotFoundException("Not found lesson for content type: " + contentType);
+        return list;
     }
 
     @Override
@@ -66,6 +73,9 @@ public class LessonServiceImp implements LessonService {
         lesson.setContentType(lessonDTO.getContentType());
         lesson.setDurationInMinutes(lessonDTO.getDurationInMinutes());
         return lessonRepository.save(lesson);
+
+
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.bookorange.api.domain.Role;
 import com.bookorange.api.dto.appuserDto.AppUserCourseEditDTO;
 import com.bookorange.api.dto.appuserDto.AppUserDTO;
 import com.bookorange.api.dto.appuserDto.UserCreateDTO;
+import com.bookorange.api.handler.exception.ObjectNotFoundException;
 import com.bookorange.api.repository.AppUserRepository;
 import com.bookorange.api.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,14 @@ import java.util.List;
 @Service
 public class AppUserServiceImp implements AppUserService {
 
+
     private final AppUserRepository appUserRepository;
+
 
     @Autowired
     public AppUserServiceImp(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
+
     }
 
     @Override
@@ -30,28 +34,28 @@ public class AppUserServiceImp implements AppUserService {
         user.setEmail(userCreateDTO.getEmail());
         user.setStackCategories(userCreateDTO.getStackCategories());
         user.setRole(role);
+
         return appUserRepository.save(user);
     }
 
+
     @Override
     public AppUser update(AppUserDTO appUserDTO) {
-        AppUser user = appUserRepository.findByUsername(appUserDTO.getUsername());
-        user.setRole(appUserDTO.getRole());
-        user.setBadges(appUserDTO.getBadges());
+        AppUser user = findById(appUserDTO.getId());
         user.setEmail(appUserDTO.getEmail());
         user.setUsername(appUserDTO.getUsername());
-        user.setStackCategories(appUserDTO.getStackCategories());
+
         return appUserRepository.save(user);
     }
 
     @Override
     public AppUser findById(Long userId) {
-        return appUserRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return appUserRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
     @Override
     public AppUser findByUsername(String username) {
-        return appUserRepository.findByUsername(username);
+        return appUserRepository.findByUsername(username).orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
     @Override
@@ -112,5 +116,6 @@ public class AppUserServiceImp implements AppUserService {
         user.finishCourse(userDto.getCourse());
         appUserRepository.save(user);
     }
+
 
 }
