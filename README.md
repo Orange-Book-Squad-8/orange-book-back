@@ -56,7 +56,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [H2]()
 - [TypeScrip Generator]()
 
-O projeto contém 81 testes bem sucedidos e 50% de cobertura do código
+O projeto contém 82 testes e 50% de cobertura do código
 
 ## :rocket: Como Rodar o Projeto
 
