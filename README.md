@@ -60,7 +60,7 @@ O projeto contém 82 testes e 50% de cobertura do código
 
 ## :rocket: Como Rodar o Projeto
 
-Primeiro você deve garantir que o [Java](https://www.java.com/pt-BR/download/manual.jsp) esteja instalado. Após isso faça o [download](https://drive.google.com/file/d/18TMtuJIqRtbw5hPidBkxaE6L4XfPO3d5/view?usp=share_link), e abra o prompt de comando.
+Primeiro você deve garantir que o [Java](https://www.java.com/pt-BR/download/manual.jsp) esteja instalado. Após isso faça o [download](https://drive.google.com/file/d/18TMtuJIqRtbw5hPidBkxaE6L4XfPO3d5/view?usp=share_link), e abra o prompt de comando. Projeto feito na SDK 17
 
 ```bash
 	#navegue até a pasta do arquivo, através do comando cd
