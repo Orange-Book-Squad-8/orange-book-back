@@ -2,7 +2,7 @@
   <img alt="BookOrange" title= "#BookOrange" src="https://github.com/Orange-Book-Squad-8/orange-book-back/blob/main/img/logo%20(1).svg".svg>
 </p>
 
-<h2>Projeto do Hackaton - Programa de Formação 2022 Season 2 Grupo FCamara</h2>
+<h2>Projeto do Hackaton - Programa de Formação 2022 Season 04 Grupo FCamara</h2>
 
 ## :x: Problema
 
